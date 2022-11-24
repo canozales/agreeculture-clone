@@ -17,20 +17,38 @@ const validateConstraints = async (values,constraints) => {
 const isValidParamPostDataRegister = async (payload) => {
   let constraints = {};
   let values = {};
+  if(validate.isEmpty(payload.email)){
+    return wrapper.error('Bad Request','Email is required',400);
+  }
   constraints[payload.name] = {length: {minimum: 3}};
+  constraints[payload.email] = {email: true};
   values[payload.name] = payload.name;
+  values[payload.email] = payload.email;
   return await validateConstraints(values,constraints);
 };
+
+const isValidParamGetAllUsers = async (payload) => {
+  let constraints = {};
+  let values = {};
+  constraints[payload.name] = {length: {minimum: 3}};
+  constraints[payload.email] = {presence: {allowEmpty: false}};
+  values[payload.name] = payload.name;
+  values[payload.email] = payload.email;
+
+  return await validateConstraints(values,constraints);
+}
+
 
 const ifExistUser = async (payload) => {
   const db = new Mongo(config.getDevelopmentDB());
   db.setCollection('user');
-  const parameter = {'email': payload.email};
+  const parameter = {'id': payload._id};
   const result = await db.findOne(parameter);
   return result;
 };
 
 module.exports = {
   isValidParamPostDataRegister: isValidParamPostDataRegister,
+  isValidParamGetAllUsers: isValidParamGetAllUsers,
   ifExistUser: ifExistUser,
 };

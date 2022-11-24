@@ -20,6 +20,18 @@ class User{
     return wrapper.data(data, '', 200);
   }
 
+  async viewAllUsers(){
+    const param = {};
+    const result = await query.findAllUsers(param);
+
+    if(result.err){
+        return result;
+    }else{
+        return wrapper.data(result.data);
+    }
+}
+
+
 }
 
 module.exports = User;

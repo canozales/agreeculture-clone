@@ -1,11 +1,12 @@
-
+const uniqueId = require('uuid-mongodb');
 
 const generalUser = () => {
   const model = {
-    uuid: '',
+    _id: uniqueId.v4(),
     name:'',
-    email:'',
+    email: '',
     password:'',
+    confirmPassword:'',
     phone:'',
     country:'',
     address:{},

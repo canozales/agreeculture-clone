@@ -20,7 +20,7 @@ class User{
     const { email, password } = payload;
     const user = await query.findOneUser({email});
     if(user.err){
-      return wrapper.error('error', user.err, 409);
+      return wrapper.error('error', user.err, 400);
     }
     const userId = user.data._id;
     const userEmail = user.data.email;
@@ -38,7 +38,14 @@ class User{
 
   async register(payload) {
     // console.log(payload);
-    const { password } = payload;
+    const { email, password, confirmPassword } = payload;
+    const user = await query.findOneUser({email});
+    if(!user.err){
+      return wrapper.error('error', 'Email telah terdaftar', 400);
+    }
+    if(password != confirmPassword){
+      return wrapper.error('error', 'Password tidak sama', 400);
+    }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
     payload.password = hashPassword;
@@ -62,28 +69,20 @@ class User{
     // console.log(payload);
     const { email, password } = payload;
     const user = await query.findOneUser({email});
-    // console.log(user);
-    // console.log(password);
-    // console.log(user.data.password);
-    const validPassword = await bcrypt.compare(password, user.data.password);
     if(user.err){
-      return wrapper.error('error', user.err, 409);
+      return wrapper.error('error', 'Email belum terdaftar', 404);
     }
+    const validPassword = await bcrypt.compare(password, user.data.password);
     const userId = user.data._id;
-    const userEmail = user.data.email;
-    if(email!==userEmail){
-      return wrapper.error('error', 'Username or password invalid!', 409);
-    }
     if(!validPassword){
-      return wrapper.error('error', 'Username or password invalid!', 409);
+      return wrapper.error('error', 'Password invalid!', 409);
     }
-
     const data = {
-      email,
-      sub: userId
+      userId,
+      email
     };
     const token =  await jwtAuth.generateToken(data);
-    return wrapper.data(token, '', 200);
+    return wrapper.data({jwt: token}, '', 200);
   }
 
 }
