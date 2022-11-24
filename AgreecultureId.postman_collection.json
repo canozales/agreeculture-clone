@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "8f2e166d-75c5-4c10-8c4a-3be52e3d78f7",
+		"name": "AgreecultureId",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19753734"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"sellerId\": \"1\",\r\n    \"name\": \"alpukat\",\r\n    \"price\": \"10000\",\r\n    \"stock\": \"200\",\r\n    \"category\": \"buah\",\r\n    \"brand\": \"agreefarm\",\r\n    \"detail\": \"buah alpukat lokal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/product/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9002/api/v1/product/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9002/api/v1/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sellerId\": \"1\",\r\n    \"name\": \"alpukat\",\r\n    \"price\": \"10000\",\r\n    \"stock\": \"300\",\r\n    \"category\": \"buah\",\r\n    \"brand\": \"agreefarm\",\r\n    \"detail\": \"buah alpukat lokal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\":\"Shadif\",\r\n        \"email\":\"shadif@mail.com\",\r\n        \"password\": \"abc123\",\r\n        \"phone\":\"082134567890\",\r\n        \"country\":\"Indonesia\",\r\n        \"address\": {\r\n            \"name\":\"Jl. MH Thamrin 1\",\r\n            \"province\":\"Jawa Barat\",\r\n            \"city\":\"Bandung\",\r\n            \"district\":\"Dayeuhkolot\",\r\n            \"urbanVillage\":\"Bojongsoang\",\r\n            \"zipCode\":\"40512\"\r\n        },\r\n        \"role\":\"buyer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jIiwic3ViIjoid1A0UEV3djFSNGFWeTYzYlYwcjhPUT09IiwiaWF0IjoxNjY5Mjc4MDI0fQ.nMTs2vEcXOoPNzATayCwwetetD_z3g56R1Oo7ns6_OE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYWRpZmExQG1haWwuY29tIiwic3ViIjoiNjM0NjYyNTcyOWU0NTg1YmE4MmU3YTVhIiwiaWF0IjoxNjY1NTU3MTE5fQ.ubuUUOVphtWw92xOCV_CMIYqRiPRuT2oeW2c_rlLxQM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user/1aab4e2f-9b3c-43d9-8998-45b74f795485",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"1aab4e2f-9b3c-43d9-8998-45b74f795485"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sellerId\": \"1\",\r\n    \"name\": \"alpukat\",\r\n    \"price\": \"10000\",\r\n    \"stock\": \"300\",\r\n    \"category\": \"buah\",\r\n    \"brand\": \"agreefarm\",\r\n    \"detail\": \"buah alpukat lokal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/product/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jIiwic3ViIjoid1A0UEV3djFSNGFWeTYzYlYwcjhPUT09IiwiaWF0IjoxNjY5Mjc4MDI0fQ.nMTs2vEcXOoPNzATayCwwetetD_z3g56R1Oo7ns6_OE",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"a@a.b\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"shadif\",\r\n    \"email\":\"a.a\",\r\n    \"password\": \"1234\",\r\n    \"confirmPassword\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Add Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2\",\r\n    \"offerId\": \"2\",\r\n    \"status\": \"0\",\r\n    \"termin\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/transaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/transaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Trasanction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/transaction/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/transaction/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transaction",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"offerId\": \"1\",\r\n    \"status\": \"0\",\r\n    \"termin\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/transaction/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Offer",
+			"item": [
+				{
+					"name": "Add Offer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"id_pembeli\": \"1\",\r\n    \"id_produk\": \"1\",\r\n    \"id_penjual\": \"2\",\r\n    \"logistik\": \"logee\",\r\n    \"rfq\": \"1\",\r\n    \"status\": \"1\",\r\n    \"termin\": \"0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/offer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"offer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Offers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/offer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"offer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Offer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/offer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"offer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Offer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/offer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"offer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Offer",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"id_pembeli\": \"1\",\r\n    \"id_produk\": \"1\",\r\n    \"id_penjual\": \"2\",\r\n    \"logistik\": \"logee-kurir\",\r\n    \"rfq\": \"1\",\r\n    \"status\": \"1\",\r\n    \"termin\": \"0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/offer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"offer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

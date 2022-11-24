@@ -25,11 +25,11 @@ class User{
     const result = await query.findAllUsers(param);
 
     if(result.err){
-        return result;
-    }else{
-        return wrapper.data(result.data);
+      return result;
     }
-}
+    return wrapper.data(result.data);
+
+  }
 
 
 }

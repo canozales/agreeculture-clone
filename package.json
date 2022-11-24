@@ -13,7 +13,7 @@
     "cover": "nyc _mocha \"test/unit/modules/product/repositories/commands/command_handler_test.js\" --recursive",
     "prepare": "husky install",
     "scriptname": "husky install",
-    "lint": "eslint bin/**"
+    "lint": "eslint bin/** --fix"
   },
   "repository": {
     "type": "git",

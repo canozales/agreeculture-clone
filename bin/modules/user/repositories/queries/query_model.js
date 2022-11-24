@@ -1,5 +1,3 @@
-const uniqueId = require('uuid-mongodb');
-
 
 const generalUser = () => {
   const model = {

@@ -36,7 +36,7 @@ const isValidParamGetAllUsers = async (payload) => {
   values[payload.email] = payload.email;
 
   return await validateConstraints(values,constraints);
-}
+};
 
 
 const ifExistUser = async (payload) => {

@@ -25,7 +25,6 @@ const postDataLogin = async (req, res, next) => {
 const postDataRegister = async (req, res, next) => {
   const payload = req.body;
   const validateParam = await validator.isValidParamPostDataRegister(payload);
-  console.log(validateParam);
   const postRequest = async (result) => {
     if(result.err){
       return result;
@@ -59,18 +58,18 @@ const getAllUsers = async (req, res, next) => {
   const getRequest = async (result) => {
     if(result.err){
       return result;
-    }else{
-      return await queryHandler.getAllUsers(queryParam);
     }
-  }
+    return await queryHandler.getAllUsers(queryParam);
+
+  };
 
   const sendResponse = async (result) => {
-    (result.err) ? wrapper.response(res,'fail',result) : 
-    wrapper.response(res, 'success', result, `Your Request Has Been Processed`);
-  }
+    (result.err) ? wrapper.response(res,'fail',result) :
+      wrapper.response(res, 'success', result, 'Your Request Has Been Processed');
+  };
 
   sendResponse(await getRequest(validateParam));
-}
+};
 
 
 

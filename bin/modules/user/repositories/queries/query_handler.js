@@ -15,14 +15,14 @@ const getUser = async (userId) => {
 
 const getAllUsers = async (queryParam) => {
   const getQuery = async (queryParam) => {
-      const user = new User(queryParam);
-      const result = await user.viewAllUsers();
-      return result;
-  }
+    const user = new User(queryParam);
+    const result = await user.viewAllUsers();
+    return result;
+  };
 
   const result = await getQuery(queryParam);
   return result;
-}
+};
 
 
 
