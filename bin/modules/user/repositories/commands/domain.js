@@ -16,28 +16,27 @@ const bcrypt = require('bcryptjs');
 
 class User{
 
-  async generateCredential(payload) {
-    const { email, password } = payload;
-    const user = await query.findOneUser({email});
-    if(user.err){
-      return wrapper.error('error', user.err, 400);
-    }
-    const userId = user.data._id;
-    const userEmail = user.data.email;
-    const pass = await commonUtil.decrypt(user.data.password, algorithm, secretKey);
-    if(email!==userEmail || pass!==password){
-      return wrapper.error('error', 'Username or password invalid!', 409);
-    }
-    const data = {
-      email,
-      sub: userId
-    };
-    const token =  await jwtAuth.generateToken(data);
-    return wrapper.data(token, '', 200);
-  }
+  // async generateCredential(payload) {
+  //   const { email, password } = payload;
+  //   const user = await query.findOneUser({email});
+  //   if(user.err){
+  //     return wrapper.error('error', user.err, 400);
+  //   }
+  //   const userId = user.data._id;
+  //   const userEmail = user.data.email;
+  //   const pass = await commonUtil.decrypt(user.data.password, algorithm, secretKey);
+  //   if(email!==userEmail || pass!==password){
+  //     return wrapper.error('error', 'Username or password invalid!', 409);
+  //   }
+  //   const data = {
+  //     email,
+  //     sub: userId
+  //   };
+  //   const token =  await jwtAuth.generateToken(data);
+  //   return wrapper.data(token, '', 200);
+  // }
 
   async register(payload) {
-    // console.log(payload);
     const { email, password, confirmPassword } = payload;
     const user = await query.findOneUser({email});
     if(!user.err){
@@ -66,7 +65,6 @@ class User{
   }
 
   async login(payload) {
-    // console.log(payload);
     const { email, password } = payload;
     const user = await query.findOneUser({email});
     if(user.err){
@@ -84,6 +82,17 @@ class User{
     const token =  await jwtAuth.generateToken(data);
     return wrapper.data({jwt: token}, '', 200);
   }
+
+  async updateUser(params, payload){
+      const result = await command.updateOneUser(params, payload);
+      return result;
+  }
+
+  async deleteUser(params){
+      const result = await command.deleteOneUser(params);
+      return result;
+  }
+
 
 }
 

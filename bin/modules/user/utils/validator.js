@@ -31,9 +31,7 @@ const isValidParamGetAllUsers = async (payload) => {
   let constraints = {};
   let values = {};
   constraints[payload.name] = {length: {minimum: 3}};
-  constraints[payload.email] = {presence: {allowEmpty: false}};
   values[payload.name] = payload.name;
-  values[payload.email] = payload.email;
 
   return await validateConstraints(values,constraints);
 };
@@ -42,8 +40,7 @@ const isValidParamGetAllUsers = async (payload) => {
 const ifExistUser = async (payload) => {
   const db = new Mongo(config.getDevelopmentDB());
   db.setCollection('user');
-  const parameter = {'id': payload._id};
-  const result = await db.findOne(parameter);
+  const result = await db.findOne(payload);
   return result;
 };
 

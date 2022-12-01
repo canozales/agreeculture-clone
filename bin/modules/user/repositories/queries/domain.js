@@ -10,15 +10,20 @@ const wrapper = require('../../../../helpers/utils/wrapper');
 // const logger = require('../../../../helpers/utils/logger');
 
 class User{
-
-  async viewUser(userId){
-    const user = await query.findById(userId);
-    const { data } = user;
-    if(user.err){
-      return wrapper.error('error', 'Can not find user!', 404);
-    }
-    return wrapper.data(data, '', 200);
+  constructor(queryParam){
+    this._id = queryParam
   }
+
+  async viewOneUser(){
+    const param = {"_id": this._id};
+    const result = await query.findOneUser(param);
+    if(result.err){
+        return result;
+    }else{
+        return wrapper.data(result.data);
+    }
+}
+
 
   async viewAllUsers(){
     const param = {};

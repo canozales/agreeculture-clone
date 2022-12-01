@@ -17,7 +17,7 @@ const postDataLogin = async (req, res, next) => {
   };
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
-      wrapper.response(res,'success',result,'Your Request Has Been Processed');
+      wrapper.response(res,'success',result,'Login success');
   };
   sendResponse(await postRequest(validateParam));
 };
@@ -34,19 +34,19 @@ const postDataRegister = async (req, res, next) => {
   };
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
-      wrapper.response(res,'success',result,'Your Request Has Been Processed');
+      wrapper.response(res,'success',result,'Registration success');
   };
   sendResponse(await postRequest(validateParam));
 };
 
 const getUser = async (req, res, next) => {
-  const userId = req.userId;
+  const userId = req.params.userId;
   const getData = async () => {
     return await queryHandler.getUser(userId);
   };
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
-      wrapper.response(res,'success',result,'Your Request Has Been Processed');
+      wrapper.response(res,'success',result,'User found');
   };
   sendResponse(await getData());
 };
@@ -65,12 +65,46 @@ const getAllUsers = async (req, res, next) => {
 
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
-      wrapper.response(res, 'success', result, 'Your Request Has Been Processed');
+      wrapper.response(res, 'success', result, 'List of users found');
   };
 
   sendResponse(await getRequest(validateParam));
 };
 
+const putOneUser = async (req, res, next) => {
+  const queryParam  = {"_id": req.params.userId};
+  const payload = req.body;
+  const validateParam = await validator.ifExistUser(queryParam);
+  const putRequest = async (result) => {
+    if(result.err){
+      return result;
+    }else{
+      return await commandHandler.putOneUser(queryParam, payload);
+    }
+  };
+  const sendResponse = async (result) => {
+    (result.err) ? wrapper.response(res,'fail',result) : 
+    wrapper.response(res,'success',result,`User updated`);
+  };
+  sendResponse(await putRequest(validateParam));
+}
+
+const deleteOneUser = async (req, res, next) => {
+  const payload  = {"_id": req.params.userId};
+  const validateParam = await validator.ifExistUser(payload);
+  const deleteRequest = async (result) => {
+    if(result.err){
+      return result;
+    }else{
+      return await commandHandler.deleteOneUser(payload);
+    }
+  }
+  const sendResponse = async (result) => {
+    (result.err) ? wrapper.response(res,'fail',result) : 
+    wrapper.response(res,'success',result,`User deleted`);
+  }
+  sendResponse(await deleteRequest(validateParam));
+}
 
 
 
@@ -78,5 +112,7 @@ module.exports = {
   postDataLogin,
   postDataRegister,
   getUser,
-  getAllUsers
+  getAllUsers,
+  putOneUser,
+  deleteOneUser
 };

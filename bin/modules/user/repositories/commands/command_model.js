@@ -1,8 +1,8 @@
-const uniqueId = require('uuid-mongodb');
+ const { v4: uuidv4 } = require('uuid');
 
 const generalUser = () => {
   const model = {
-    _id: uniqueId.v4(),
+    _id: uuidv4(),
     name:'',
     email: '',
     password:'',

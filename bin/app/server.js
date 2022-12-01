@@ -50,10 +50,12 @@ let AppServer = function(){
   });
 
   //authenticated client can access the end point, place code bellow
+  this.server.post('/api/v1/register', userHandler.postDataRegister);
   this.server.post('/api/v1/login', userHandler.postDataLogin);
   this.server.get('/api/v1/user/', jwtAuth.verifyToken, userHandler.getAllUsers);
-  this.server.get('/api/v1/user/:id', jwtAuth.verifyToken, userHandler.getUser);
-  this.server.post('/api/v1/register', userHandler.postDataRegister);
+  this.server.get('/api/v1/user/:userId', jwtAuth.verifyToken, userHandler.getUser);
+  this.server.put('/api/v1/user/:userId', jwtAuth.verifyToken, userHandler.putOneUser);
+  this.server.del('/api/v1/user/:userId', jwtAuth.verifyToken, userHandler.deleteOneUser);
 
 };
 
