@@ -31,18 +31,18 @@ const postDataRegister = async (payload) => {
 const putOneUser = async (id, payload) => {
   const user = new User();
   const putCommand = async (id, payload) => {
-      return await user.updateUser(id, payload);
-  }
+    return await user.updateUser(id, payload);
+  };
   return putCommand(id, payload);
-}
+};
 
 const deleteOneUser = async (payload) => {
   const user = new User();
   const delCommand = async (payload) => {
-      return await user.deleteUser(payload);
-  }
+    return await user.deleteUser(payload);
+  };
   return delCommand(payload);
-}
+};
 
 
 module.exports = {

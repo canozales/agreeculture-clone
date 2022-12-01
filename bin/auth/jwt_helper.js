@@ -28,7 +28,7 @@ const verifyToken = async (req, res, next) => {
     }
   }
   const userId = decodedToken.userId;
-  const param = {"_id": userId};
+  const param = {'_id': userId};
   const user = userQuery.findOneUser(param);
   if(user.err){
     wrapper.response(res, 'fail', result, 'Invalid token!', 403);

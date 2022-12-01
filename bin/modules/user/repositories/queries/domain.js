@@ -11,18 +11,18 @@ const wrapper = require('../../../../helpers/utils/wrapper');
 
 class User{
   constructor(queryParam){
-    this._id = queryParam
+    this._id = queryParam;
   }
 
   async viewOneUser(){
-    const param = {"_id": this._id};
+    const param = {'_id': this._id};
     const result = await query.findOneUser(param);
     if(result.err){
-        return result;
-    }else{
-        return wrapper.data(result.data);
+      return result;
     }
-}
+    return wrapper.data(result.data);
+
+  }
 
 
   async viewAllUsers(){

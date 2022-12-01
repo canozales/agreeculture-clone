@@ -5,8 +5,8 @@ const Mongo = require('../../../../helpers/databases/mongodb/db');
 // const wrapper = require('../../../../helpers/utils/wrapper');
 const config = require('../../../../infra/configs/global_config');
 //const ObjectId = require('mongodb').ObjectId;
-const uniqueId = require('uuid-mongodb');
-const { UUID } = require('mongodb');
+// const uniqueId = require('uuid-mongodb');
+// const { UUID } = require('mongodb');
 
 
 

@@ -72,39 +72,39 @@ const getAllUsers = async (req, res, next) => {
 };
 
 const putOneUser = async (req, res, next) => {
-  const queryParam  = {"_id": req.params.userId};
+  const queryParam  = {'_id': req.params.userId};
   const payload = req.body;
   const validateParam = await validator.ifExistUser(queryParam);
   const putRequest = async (result) => {
     if(result.err){
       return result;
-    }else{
-      return await commandHandler.putOneUser(queryParam, payload);
     }
+    return await commandHandler.putOneUser(queryParam, payload);
+
   };
   const sendResponse = async (result) => {
-    (result.err) ? wrapper.response(res,'fail',result) : 
-    wrapper.response(res,'success',result,`User updated`);
+    (result.err) ? wrapper.response(res,'fail',result) :
+      wrapper.response(res,'success',result,'User updated');
   };
   sendResponse(await putRequest(validateParam));
-}
+};
 
 const deleteOneUser = async (req, res, next) => {
-  const payload  = {"_id": req.params.userId};
+  const payload  = {'_id': req.params.userId};
   const validateParam = await validator.ifExistUser(payload);
   const deleteRequest = async (result) => {
     if(result.err){
       return result;
-    }else{
-      return await commandHandler.deleteOneUser(payload);
     }
-  }
+    return await commandHandler.deleteOneUser(payload);
+
+  };
   const sendResponse = async (result) => {
-    (result.err) ? wrapper.response(res,'fail',result) : 
-    wrapper.response(res,'success',result,`User deleted`);
-  }
+    (result.err) ? wrapper.response(res,'fail',result) :
+      wrapper.response(res,'success',result,'User deleted');
+  };
   sendResponse(await deleteRequest(validateParam));
-}
+};
 
 
 

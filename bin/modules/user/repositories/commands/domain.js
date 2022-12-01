@@ -9,9 +9,9 @@ const wrapper = require('../../../../helpers/utils/wrapper');
 const validate = require('validate.js');
 // const logger = require('../../../../helpers/utils/logger');
 const jwtAuth = require('../../../../auth/jwt_helper');
-const commonUtil = require('../../../../helpers/utils/common');
-const algorithm = 'aes-256-ctr';
-const secretKey = 'Dom@in2018';
+// const commonUtil = require('../../../../helpers/utils/common');
+// const algorithm = 'aes-256-ctr';
+// const secretKey = 'Dom@in2018';
 const bcrypt = require('bcryptjs');
 
 class User{
@@ -84,13 +84,13 @@ class User{
   }
 
   async updateUser(params, payload){
-      const result = await command.updateOneUser(params, payload);
-      return result;
+    const result = await command.updateOneUser(params, payload);
+    return result;
   }
 
   async deleteUser(params){
-      const result = await command.deleteOneUser(params);
-      return result;
+    const result = await command.deleteOneUser(params);
+    return result;
   }
 
 
