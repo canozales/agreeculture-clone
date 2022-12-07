@@ -10,7 +10,10 @@ const generalUser = () => {
     phone:'',
     country:'',
     address:{},
-    role:''
+    role:'',
+    resetPassToken: '',
+    createdAt: '',
+    updatedAt:''
 
   };
   return model;

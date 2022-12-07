@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "junit": "_mocha \"test/**/*_test.js\" --timeout=5000 --reporter mocha-junit-reporter",
-    "test": "mocha \"test/unit/modules/product/repositories/commands/command_handler_test.js\" --timeout=5000",
-    "cover": "nyc _mocha \"test/unit/modules/product/repositories/commands/command_handler_test.js\" --recursive",
+    "test": "mocha \"test/unit/modules/user/repositories/commands/command_handler_test.js\" --timeout=5000",
+    "cover": "nyc _mocha \"test/unit/modules/user/repositories/commands/command_handler_test.js\" --recursive",
     "prepare": "husky install",
     "scriptname": "husky install",
     "lint": "eslint bin/** --fix"
@@ -56,6 +56,7 @@
     "node-base64-image": "^2.0.4",
     "node-cron": "1.2.1",
     "node-datetime": "2.0.3",
+    "nodemailer": "^6.8.0",
     "odata-parser": "1.4.1",
     "passport": "^0.6.0",
     "passport-http": "0.3.0",

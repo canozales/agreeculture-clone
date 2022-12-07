@@ -5,7 +5,7 @@ const command = require('./command');
 const model = require('./command_model');
 const query = require('../queries/query');
 const wrapper = require('../../../../helpers/utils/wrapper');
-// const config = require('../../../../infra/configs/global_config');
+const config = require('../../../../infra/configs/global_config');
 const validate = require('validate.js');
 // const logger = require('../../../../helpers/utils/logger');
 const jwtAuth = require('../../../../auth/jwt_helper');
@@ -13,6 +13,8 @@ const jwtAuth = require('../../../../auth/jwt_helper');
 // const algorithm = 'aes-256-ctr';
 // const secretKey = 'Dom@in2018';
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 
 class User{
 
@@ -60,6 +62,7 @@ class User{
       return accumulator;
     }, view);
     const document = view;
+    document.createdAt = new Date();
     const result = await command.insertOneUser(document);
     return result;
   }
@@ -83,7 +86,104 @@ class User{
     return wrapper.data({jwt: token}, '', 200);
   }
 
+  async resetPassword(payload) {
+    const { email } = payload;
+    const user = await query.findOneUser({email});
+    if(user.err){
+      return wrapper.error('error', 'Email belum terdaftar', 404);
+    }
+    const userId = user.data._id;
+    const data = {
+      userId,
+      email
+    };
+    const token =  await jwtAuth.generateToken(data);
+
+    const account = config.getEmailAccount();
+
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      auth: {
+          user: account.user,
+          pass: account.pass
+      }
+    });
+    const message = {
+      to: email,
+      subject: 'Reset Account Password Link',
+      html: `
+      <h3>Please click the link below to reset your password</h3>
+      <p>http://localhost:9000/api/v1/reset-password/?token=${token}</p>
+      `,
+    }
+    console.log(message.html);
+    const queryParam  = {'_id': userId};
+    const updatedToken  = {'resetPassToken': token};
+    const result = await command.updateOneUser(queryParam, updatedToken);
+    if(result.err){
+      return wrapper.error('error', 'Gagal memperbarui token reset password', 400);
+    } else {
+      transporter.sendMail(message);
+      return result;
+    }
+  }
+
+  async updatePassword(payload) {
+    const { _id, token, password, confirmPassword } = payload;
+    if(password != confirmPassword){
+      return wrapper.error('error', 'Password tidak sama', 400);
+    }
+    const user = await query.findOneUser({_id});
+    if(user.err){
+      return wrapper.error('error', 'User tidak ditemukan', 404);
+    }
+    const userId = user.data._id;
+    const email = user.data.email;
+    try {
+      verifyToken = jwt.verify(token, config.getSecretToken());
+    } catch (error) {
+      if(error instanceof jwt.TokenExpiredError){
+        wrapper.error('error', 'Access token expired!', 401);
+      }else{
+        wrapper.error('error', 'Token is not valid!', 401);
+      }
+    }
+    const account = config.getEmailAccount();
+
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      auth: {
+          user: account.user,
+          pass: account.pass
+      }
+    });
+    const message = {
+      to: email,
+      subject: 'Password changed',
+      html: `
+      <p>Password berhasil diubah</p>
+      `,
+    }
+    // console.log("email: ", email);
+    // console.log(message);
+    const queryParam  = {'_id': userId};
+    const salt = await bcrypt.genSalt(10);
+    
+    const hashPassword = await bcrypt.hash(password, salt);
+    const updatedData  = {'password': hashPassword, 'resetPassToken': ''};
+    const result = await command.updateOneUser(queryParam, updatedData);
+    if(result.err){
+      return wrapper.error('error', 'Gagal memperbarui password', 400);
+    } else {
+      transporter.sendMail(message);
+      return result;
+    }
+  }
+
   async updateUser(params, payload){
+    payload.updatedAt = new Date();
     const result = await command.updateOneUser(params, payload);
     return result;
   }

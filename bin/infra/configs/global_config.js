@@ -38,6 +38,10 @@ const getPrivateKey = () => {
   return nconf.get('PRIVATE_KEY_PATH');
 };
 
+const getEmailAccount = () => {
+  return nconf.get('EMAIL_ACC');
+};
+
 module.exports = {
   getAuthAPI: getAuthAPI,
   getSentryDSN: getSentryDSN,
@@ -47,5 +51,6 @@ module.exports = {
   getAWSCredential: getAWSCredential,
   getSecretToken: getSecretToken,
   getPublicKey: getPublicKey,
-  getPrivateKey: getPrivateKey
+  getPrivateKey: getPrivateKey,
+  getEmailAccount: getEmailAccount
 };

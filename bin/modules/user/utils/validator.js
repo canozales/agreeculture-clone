@@ -44,8 +44,16 @@ const ifExistUser = async (payload) => {
   return result;
 };
 
+const ifExistEmail = async (payload) => {
+  const db = new Mongo(config.getDevelopmentDB());
+  db.setCollection('user');
+  const result = await db.findOne(payload);
+  return result;
+};
+
 module.exports = {
   isValidParamPostDataRegister: isValidParamPostDataRegister,
   isValidParamGetAllUsers: isValidParamGetAllUsers,
   ifExistUser: ifExistUser,
+  ifExistEmail: ifExistEmail
 };

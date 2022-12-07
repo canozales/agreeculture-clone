@@ -19,5 +19,9 @@
         "secretKey": "",
         "endPoint": "",
         "pathStyle": true
+    },
+    "EMAIL_ACC" : {
+        "user": "pete.bednar@ethereal.email",
+        "pass": "mSVwrUVjbYpwwg6UWD"
     }
 }

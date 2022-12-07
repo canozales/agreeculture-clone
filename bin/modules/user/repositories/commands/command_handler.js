@@ -6,27 +6,35 @@ const User = require('./domain');
 
 const postDataLogin = async (payload) => {
   const user = new User();
-  const postCommand = async (payload) => {
+  const loginCommand = async (payload) => {
     return await user.login(payload);
   };
-  return await postCommand(payload);
+  return await loginCommand(payload);
 };
 
 const postDataRegister = async (payload) => {
   const user = new User();
-  const postCommand = async (payload) => {
+  const registerCommand = async (payload) => {
     return await user.register(payload);
   };
-  return await postCommand(payload);
+  return await registerCommand(payload);
 };
 
-// const postOneUser = async (payload) => {
-//   const user = new User();
-//   const postCommand = async (payload) => {
-//       return await user.addNewUser(payload);
-//   }
-//   return postCommand(payload);
-// }
+const passwordReset = async (payload) => {
+  const user = new User();
+  const passResetCommand = async (payload) => {
+    return await user.resetPassword(payload);
+  };
+  return await passResetCommand(payload);
+};
+
+const passwordUpdate = async (payload) => {
+  const user = new User();
+  const passUpdateCommand = async (payload) => {
+    return await user.updatePassword(payload);
+  };
+  return await passUpdateCommand(payload);
+};
 
 const putOneUser = async (id, payload) => {
   const user = new User();
@@ -48,6 +56,8 @@ const deleteOneUser = async (payload) => {
 module.exports = {
   postDataLogin : postDataLogin,
   postDataRegister : postDataRegister,
+  passwordReset: passwordReset,
+  passwordUpdate: passwordUpdate,
   putOneUser: putOneUser,
   deleteOneUser: deleteOneUser
 };

@@ -39,7 +39,7 @@ class DB{
       const db = connection.collection(collectionName);
       const recordset = await db.findOne(parameter);
       if(validate.isEmpty(recordset)){
-        return wrapper.error('Data Not Found','Please Try Another Input',404);
+        return wrapper.error('Data Not Found','User not found',404);
       }
       return wrapper.data(recordset);
 
@@ -66,7 +66,7 @@ class DB{
       const db = connection.collection(collectionName);
       const recordset = await db.find(parameter).toArray();
       if(validate.isEmpty(recordset)){
-        return wrapper.error('Data Not Found','Please Try Another Input',404);
+        return wrapper.error('Data Not Found','Users not found',404);
       }
       return wrapper.data(recordset);
 
@@ -180,7 +180,7 @@ class DB{
       const recordset = await db.deleteOne(parameter);
 
       if(validate.isEmpty(recordset)){
-        return wrapper.error('Data Not Found','Please Try Another Input',404);
+        return wrapper.error('Data Not Found','User not found',404);
       }
       return wrapper.data('Data Found','Your Request Has Been Processed',200);
 
@@ -211,7 +211,7 @@ class DB{
       const parameterPage = row * (page - 1);
       const recordset = await db.find(param).sort(parameterSort).limit(row).skip(parameterPage).toArray();
       if(validate.isEmpty(recordset)){
-        return wrapper.error('Data Not Found','Please Try Another Input',404);
+        return wrapper.error('Data Not Found','Data not found',404);
       }
       return wrapper.data(recordset);
 
@@ -239,7 +239,7 @@ class DB{
       const db = connection.collection(collectionName);
       const recordset = await db.count(param);
       if(validate.isEmpty(recordset)){
-        return wrapper.error('Data Not Found','Please Try Another Input',404);
+        return wrapper.error('Data Not Found','Data not found',404);
       }
       return wrapper.data(recordset);
 

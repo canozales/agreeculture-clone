@@ -7,7 +7,6 @@ const config = require('../../../../infra/configs/global_config');
 const insertOneUser = async (document) => {
   const db = new Mongo(config.getDevelopmentDB());
   db.setCollection('user');
-  document.createdAt = new Date();
   const result = await db.insertOne(document);
   return result;
 };
