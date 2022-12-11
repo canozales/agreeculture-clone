@@ -13,8 +13,9 @@ const jwtAuth = require('../../../../auth/jwt_helper');
 // const algorithm = 'aes-256-ctr';
 // const secretKey = 'Dom@in2018';
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+const mailman = require('../../../../helpers/components/nodemailer/email');
 const jwt = require('jsonwebtoken');
+const minioClient = require('../../../../helpers/components/minio/sdk');
 
 class User{
 
@@ -40,6 +41,13 @@ class User{
 
   async register(payload) {
     const { email, password, confirmPassword } = payload;
+    const image = '../../../../temp/logo-agree.png';
+    minioClient.init();
+    minioClient.bucketCreate('userProfilePhotos');
+    minioClient.objectUpload('userProfilePhotos', 'userImage', image);
+    const url = minioClient.objectGetUrl('userProfilePhotos', 'userImage');
+    payload.imageUrl = url;
+    console.log("img: ", url);
     const user = await query.findOneUser({email});
     if(!user.err){
       return wrapper.error('error', 'Email telah terdaftar', 400);
@@ -99,34 +107,33 @@ class User{
     };
     const token =  await jwtAuth.generateToken(data);
 
-    const account = config.getEmailAccount();
+    mailman.init();
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      auth: {
-          user: account.user,
-          pass: account.pass
-      }
-    });
+    const baseUrl = config.getBaseUrl();
+
+    const account = config.getEmailAccount();
+    
+    const servicePort = config.getServicePort();
+
     const message = {
+      from: account.user,
       to: email,
       subject: 'Reset Account Password Link',
       html: `
       <h3>Please click the link below to reset your password</h3>
-      <p>http://localhost:9000/api/v1/reset-password/?token=${token}</p>
+      <p>${baseUrl}/${servicePort}/api/v1/reset-password/?token=${token}</p>
       `,
-    }
-    console.log(message.html);
+    };
+    // console.log(message.html);
     const queryParam  = {'_id': userId};
     const updatedToken  = {'resetPassToken': token};
     const result = await command.updateOneUser(queryParam, updatedToken);
     if(result.err){
       return wrapper.error('error', 'Gagal memperbarui token reset password', 400);
-    } else {
-      transporter.sendMail(message);
-      return result;
     }
+    mailman.sendMail(message);
+    return result;
+
   }
 
   async updatePassword(payload) {
@@ -140,6 +147,7 @@ class User{
     }
     const userId = user.data._id;
     const email = user.data.email;
+    let verifyToken;
     try {
       verifyToken = jwt.verify(token, config.getSecretToken());
     } catch (error) {
@@ -149,37 +157,30 @@ class User{
         wrapper.error('error', 'Token is not valid!', 401);
       }
     }
-    const account = config.getEmailAccount();
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      auth: {
-          user: account.user,
-          pass: account.pass
-      }
-    });
+    mailman.init();
+
     const message = {
       to: email,
       subject: 'Password changed',
       html: `
       <p>Password berhasil diubah</p>
       `,
-    }
+    };
     // console.log("email: ", email);
     // console.log(message);
     const queryParam  = {'_id': userId};
     const salt = await bcrypt.genSalt(10);
-    
+
     const hashPassword = await bcrypt.hash(password, salt);
     const updatedData  = {'password': hashPassword, 'resetPassToken': ''};
     const result = await command.updateOneUser(queryParam, updatedData);
     if(result.err){
       return wrapper.error('error', 'Gagal memperbarui password', 400);
-    } else {
-      transporter.sendMail(message);
-      return result;
     }
+    mailman.sendMail(message);
+    return result;
+
   }
 
   async updateUser(params, payload){

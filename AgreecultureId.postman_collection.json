@@ -152,7 +152,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\":\"bangshadif@gmail.com\"\r\n}",
+									"raw": "{\r\n    \"email\":\"\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -160,12 +160,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/api/v1/forgot-password",
-									"protocol": "http",
+									"raw": "{{base-url}}/api/v1/forgot-password",
 									"host": [
-										"localhost"
+										"{{base-url}}"
 									],
-									"port": "9000",
 									"path": [
 										"api",
 										"v1",
@@ -182,7 +180,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"newPassword\":\"1234\",\r\n    \"confirmPassword\": \"1234\"\r\n}",
+									"raw": "{\r\n    \"newPassword\":\"1237\",\r\n    \"confirmPassword\": \"1237\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -190,21 +188,20 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/api/v1/reset-password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDAzZTAyMC0xMmEyLTRmYzctODA3Zi1kMWU3ODYyODg4ZmEiLCJlbWFpbCI6ImJhbmdzaGFkaWZAZ21haWwuY29tIiwiaWF0IjoxNjcwNDEwMzUyfQ.qBwlIeE5UjCDPeJS2Lc1vncpA55K6aBoyIjeSUhJEAk",
-									"protocol": "http",
+									"raw": "{{base-url}}/api/v1/reset-password/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDAzZTAyMC0xMmEyLTRmYzctODA3Zi1kMWU3ODYyODg4ZmEiLCJlbWFpbCI6ImJhbmdzaGFkaWZAZ21haWwuY29tIiwiaWF0IjoxNjcwNzE5MzQxfQ.PiuKSaVSmuL6HWwsRkXeCqO9EBB5nFO9A6-nA2LMO1Q",
 									"host": [
-										"localhost"
+										"{{base-url}}"
 									],
-									"port": "9000",
 									"path": [
 										"api",
 										"v1",
-										"reset-password"
+										"reset-password",
+										""
 									],
 									"query": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDAzZTAyMC0xMmEyLTRmYzctODA3Zi1kMWU3ODYyODg4ZmEiLCJlbWFpbCI6ImJhbmdzaGFkaWZAZ21haWwuY29tIiwiaWF0IjoxNjcwNDEwMzUyfQ.qBwlIeE5UjCDPeJS2Lc1vncpA55K6aBoyIjeSUhJEAk"
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDAzZTAyMC0xMmEyLTRmYzctODA3Zi1kMWU3ODYyODg4ZmEiLCJlbWFpbCI6ImJhbmdzaGFkaWZAZ21haWwuY29tIiwiaWF0IjoxNjcwNzE5MzQxfQ.PiuKSaVSmuL6HWwsRkXeCqO9EBB5nFO9A6-nA2LMO1Q"
 										}
 									]
 								}
@@ -220,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"shadif\",\r\n    \"email\":\"bangshadif@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"confirmPassword\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"name\":\"\",\r\n    \"email\":\"\",\r\n    \"password\": \"1234\",\r\n    \"confirmPassword\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,12 +225,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/api/v1/register",
-							"protocol": "http",
+							"raw": "{{base-url}}/api/v1/register",
 							"host": [
-								"localhost"
+								"{{base-url}}"
 							],
-							"port": "9000",
 							"path": [
 								"api",
 								"v1",
@@ -257,7 +252,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"bangshadif@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"email\":\"\",\r\n    \"password\": \"1237\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,12 +260,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/api/v1/login",
-							"protocol": "http",
+							"raw": "{{base-url}}/api/v1/login",
 							"host": [
-								"localhost"
+								"{{base-url}}"
 							],
-							"port": "9000",
 							"path": [
 								"api",
 								"v1",
@@ -292,12 +285,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:9000/api/v1/user/",
-							"protocol": "http",
+							"raw": "{{base-url}}/api/v1/user/",
 							"host": [
-								"localhost"
+								"{{base-url}}"
 							],
-							"port": "9000",
 							"path": [
 								"api",
 								"v1",
@@ -320,17 +311,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:9000/api/v1/user/e81db85a-7c66-4f7c-bc3d-54f67f7016b8",
-							"protocol": "http",
+							"raw": "{{base-url}}/api/v1/user/d911fad8-160a-4347-b69b-c705ae1f557e",
 							"host": [
-								"localhost"
+								"{{base-url}}"
 							],
-							"port": "9000",
 							"path": [
 								"api",
 								"v1",
 								"user",
-								"e81db85a-7c66-4f7c-bc3d-54f67f7016b8"
+								"d911fad8-160a-4347-b69b-c705ae1f557e"
 							]
 						}
 					},
@@ -348,17 +337,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:9000/api/v1/user/e81db85a-7c66-4f7c-bc3d-54f67f7016b8",
-							"protocol": "http",
+							"raw": "{{base-url}}/api/v1/user/d22c4ccb-0480-45bb-af37-cefebd4f0a6e",
 							"host": [
-								"localhost"
+								"{{base-url}}"
 							],
-							"port": "9000",
 							"path": [
 								"api",
 								"v1",
 								"user",
-								"e81db85a-7c66-4f7c-bc3d-54f67f7016b8"
+								"d22c4ccb-0480-45bb-af37-cefebd4f0a6e"
 							]
 						}
 					},
@@ -377,7 +364,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"shadif3\",\r\n    \"phone\": \"18123456789\"\r\n}",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"phone\": \"18123456789\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -385,12 +372,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/api/v1/user/d22c4ccb-0480-45bb-af37-cefebd4f0a6e",
-							"protocol": "http",
+							"raw": "{{base-url}}/api/v1/user/d22c4ccb-0480-45bb-af37-cefebd4f0a6e",
 							"host": [
-								"localhost"
+								"{{base-url}}"
 							],
-							"port": "9000",
 							"path": [
 								"api",
 								"v1",

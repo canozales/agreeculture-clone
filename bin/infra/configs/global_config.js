@@ -42,6 +42,18 @@ const getEmailAccount = () => {
   return nconf.get('EMAIL_ACC');
 };
 
+const getMinioAccount = () => {
+  return nconf.get('MINIO');
+};
+
+const getBaseUrl = () => {
+  return nconf.get('BASE_URL');
+};
+
+const getServicePort = () => {
+  return nconf.get('PORT');
+};
+
 module.exports = {
   getAuthAPI: getAuthAPI,
   getSentryDSN: getSentryDSN,
@@ -52,5 +64,8 @@ module.exports = {
   getSecretToken: getSecretToken,
   getPublicKey: getPublicKey,
   getPrivateKey: getPrivateKey,
-  getEmailAccount: getEmailAccount
+  getEmailAccount: getEmailAccount,
+  getMinioAccount: getMinioAccount,
+  getBaseUrl: getBaseUrl,
+  getServicePort: getServicePort
 };

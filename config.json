@@ -1,6 +1,7 @@
 {
     "SERVICE_NAME": "productService",
-    "PORT": 9000,
+    "BASE_URL": "http://localhost",
+    "PORT": 8000,
     "ENVIRONMENT": "DEVELOPMENT",
     "AUTH_API_BASIC": [{"username": "telkom", "password": "da1c25d8-37c8-41b1-afe2-42dd4825bfea"}],
     "DSN_SENTRY_URL": "https://96d5b15d655e41cd81f2c15f82b8aec3:196f1781b900470f98bf362274d3f869@sentry.io/279589",
@@ -15,13 +16,14 @@
     "MOCKUP_TOPIC": "arn:aws:sns:ap-southeast-1:632537985342:MockupTopic",
     "DEVELOPMENT_MONGO_DATABASE_URL": "mongodb://localhost:27017/agreecultureUserDB",
     "MINIO": {
-        "accessKey": "",
-        "secretKey": "",
-        "endPoint": "",
-        "pathStyle": true
+        "accessKey": "admin",
+        "secretKey": "password",
+        "useSSL": false,
+        "endPoint": "192.168.1.4",
+        "port": 53797
     },
     "EMAIL_ACC" : {
-        "user": "pete.bednar@ethereal.email",
-        "pass": "mSVwrUVjbYpwwg6UWD"
+        "user": "agreepedia123@gmail.com",
+        "pass": "dqsknyobcepzmlqm"
     }
 }

@@ -87,8 +87,8 @@ const putOneUser = async (req, res, next) => {
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
       wrapper.response(res,'success', wrapper.data({
-        _id: result.data._id, 
-        name: result.data.name, 
+        _id: result.data._id,
+        name: result.data.name,
         phone: result.data.phone
       }),'User updated');
   };
@@ -125,8 +125,8 @@ const passwordReset = async (req, res, next) => {
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
       wrapper.response(res,'success', wrapper.data({
-        _id: result.data._id, 
-        email: result.data.email, 
+        _id: result.data._id,
+        email: result.data.email,
       }),'Password reset link sent');
   };
   sendResponse(await passResetRequest(validateParam));
@@ -136,7 +136,7 @@ const passwordUpdate = async (req, res, next) => {
   const token = req.query.token;
   const newPass = req.body.newPassword;
   const confirmPass = req.body.confirmPassword;
-  decodedToken = jwt.verify(token, config.getSecretToken());
+  const decodedToken = jwt.verify(token, config.getSecretToken());
   const userId = decodedToken.userId;
   const id = {'_id': userId};
   const payload  = {'_id': userId, 'token': token, 'password': newPass, 'confirmPassword': confirmPass};
@@ -151,8 +151,8 @@ const passwordUpdate = async (req, res, next) => {
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
       wrapper.response(res,'success', wrapper.data({
-        _id: result.data._id, 
-        email: result.data.email, 
+        _id: result.data._id,
+        email: result.data.email,
       }),'Password changed');
   };
   sendResponse(await passResetRequest(validateParam));
