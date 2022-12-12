@@ -1,0 +1,20 @@
+stages:
+    - build
+    - test
+
+build:
+    stage: build
+    script:
+        - npm install
+    artifacts:
+      paths:
+      - node_modules
+
+test:
+    stage: test
+    script:
+        - npm install --global mocha
+        - npm test
+    artifacts:
+      paths:
+      - node_modules
