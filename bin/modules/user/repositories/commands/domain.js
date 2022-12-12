@@ -41,13 +41,29 @@ class User{
 
   async register(payload) {
     const { email, password, confirmPassword } = payload;
-    const image = '../../../../temp/logo-agree.png';
+    const image = 'D:/Magang/Telkom DBT/Tugas Akhir DBT/user-service/temp/logo-agree.png'; //ganti dengan input user
+    const bucketName = 'user-profile-photos';
+    const time = new Date();
+    const ms = time.getMilliseconds().toString();
+    const ss = time.getSeconds().toString();
+    const mm = time.getMinutes().toString();
+    const hh = time.getHours().toString();
+    const fileName = `userImage${hh}${mm}${ss}${ms}`;
     minioClient.init();
-    minioClient.bucketCreate('userProfilePhotos');
-    minioClient.objectUpload('userProfilePhotos', 'userImage', image);
-    const url = minioClient.objectGetUrl('userProfilePhotos', 'userImage');
-    payload.imageUrl = url;
-    console.log("img: ", url);
+    const bucket = await minioClient.bucketCreate(bucketName);
+    if(bucket.err){
+      return wrapper.error(err);
+    }
+    const upload = await minioClient.objectUpload(bucketName, fileName, image);
+    if(upload.err){
+      return wrapper.error(err);
+    }
+    const url = await minioClient.objectGetUrl(bucketName, fileName);
+    if(url.err){
+      return wrapper.error(err);
+    }
+    payload.imageUrl = url.data.toString();
+    console.log('img: ', payload.imageUrl);
     const user = await query.findOneUser({email});
     if(!user.err){
       return wrapper.error('error', 'Email telah terdaftar', 400);
@@ -61,6 +77,7 @@ class User{
     const data = [payload];
     let view = model.generalUser();
     view = data.reduce((accumulator, value) => {
+      if(!validate.isEmpty(value.imageUrl)){accumulator.imageUrl = value.imageUrl;}
       if(!validate.isEmpty(value.name)){accumulator.name = value.name;}
       if(!validate.isEmpty(value.email)){accumulator.email = value.email;}
       if(!validate.isEmpty(value.password)){accumulator.password = value.password;}
@@ -112,7 +129,7 @@ class User{
     const baseUrl = config.getBaseUrl();
 
     const account = config.getEmailAccount();
-    
+
     const servicePort = config.getServicePort();
 
     const message = {
@@ -147,7 +164,6 @@ class User{
     }
     const userId = user.data._id;
     const email = user.data.email;
-    let verifyToken;
     try {
       verifyToken = jwt.verify(token, config.getSecretToken());
     } catch (error) {

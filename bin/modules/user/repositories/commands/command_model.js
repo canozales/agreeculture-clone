@@ -8,10 +8,9 @@ const generalUser = () => {
     email: '',
     password:'',
     confirmPassword:'',
-    phone:'',
-    country:'',
-    address:{},
-    role:'',
+    job:'',
+    gender:'',
+    location:'',
     resetPassToken: '',
     createdAt: '',
     updatedAt:''

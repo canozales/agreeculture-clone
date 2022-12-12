@@ -5,17 +5,9 @@ const generalUser = () => {
     name:'',
     email:'',
     password:'',
-    phone:'',
-    country:'',
-    address: {
-      name:'',
-      province:'',
-      city:'',
-      district:'',
-      urbanVillage:'',
-      zipCode:''
-    },
-    role:''
+    job:'',
+    gender:'',
+    location:''
   };
   return model;
 };
