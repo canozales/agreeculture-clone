@@ -187,7 +187,7 @@ class User{
     const mm = time.getMinutes().toString();
     const hh = time.getHours().toString();
     const fileName = `userImage${hh}${mm}${ss}${ms}`;
-    console.log("image: ", payload);
+    // console.log('image: ', payload);
     minioClient.init();
     const bucket = await minioClient.bucketCreate(bucketName);
     if(bucket.err){
