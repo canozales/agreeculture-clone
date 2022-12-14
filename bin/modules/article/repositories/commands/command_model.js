@@ -6,6 +6,7 @@ const generalArticle = () => {
     judul:'',
     author:'',
     category:[],
+    content: '',
     createdAt: '',
     updatedAt:'',
   };

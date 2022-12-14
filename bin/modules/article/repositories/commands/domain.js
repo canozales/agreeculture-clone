@@ -23,6 +23,7 @@ class Article{
       if(!validate.isEmpty(value.judul)){accumulator.judul = value.judul;}
       if(!validate.isEmpty(value.author)){accumulator.author = value.author;}
       if(!validate.isEmpty(value.category)){accumulator.category = value.category;}
+      if(!validate.isEmpty(value.content)){accumulator.content = value.content;}
       return accumulator;
     }, view);
     const document = view;
@@ -38,6 +39,7 @@ class Article{
       if(!validate.isEmpty(value.judul)){accumulator.judul = value.judul;}
       if(!validate.isEmpty(value.author)){accumulator.author = value.author;}
       if(!validate.isEmpty(value.category)){accumulator.category = value.category;}
+      if(!validate.isEmpty(value.content)){accumulator.content = value.content;}
       return accumulator;
     }, view);
     const document = view;
