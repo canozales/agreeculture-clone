@@ -41,29 +41,6 @@ class User{
 
   async register(payload) {
     const { email, password, confirmPassword } = payload;
-    const image = 'D:/Magang/Telkom DBT/Tugas Akhir DBT/user-service/temp/logo-agree.png'; //ganti dengan input user
-    const bucketName = 'user-profile-photos';
-    const time = new Date();
-    const ms = time.getMilliseconds().toString();
-    const ss = time.getSeconds().toString();
-    const mm = time.getMinutes().toString();
-    const hh = time.getHours().toString();
-    const fileName = `userImage${hh}${mm}${ss}${ms}`;
-    minioClient.init();
-    const bucket = await minioClient.bucketCreate(bucketName);
-    if(bucket.err){
-      return wrapper.error(err);
-    }
-    const upload = await minioClient.objectUpload(bucketName, fileName, image);
-    if(upload.err){
-      return wrapper.error(err);
-    }
-    const url = await minioClient.objectGetUrl(bucketName, fileName);
-    if(url.err){
-      return wrapper.error(err);
-    }
-    payload.imageUrl = url.data.toString();
-    console.log('img: ', payload.imageUrl);
     const user = await query.findOneUser({email});
     if(!user.err){
       return wrapper.error('error', 'Email telah terdaftar', 400);
@@ -164,6 +141,7 @@ class User{
     }
     const userId = user.data._id;
     const email = user.data.email;
+    let verifyToken;
     try {
       verifyToken = jwt.verify(token, config.getSecretToken());
     } catch (error) {
@@ -201,6 +179,29 @@ class User{
 
   async updateUser(params, payload){
     payload.updatedAt = new Date();
+    const image = payload.image;
+    const bucketName = 'user-profile-photos';
+    const time = new Date();
+    const ms = time.getMilliseconds().toString();
+    const ss = time.getSeconds().toString();
+    const mm = time.getMinutes().toString();
+    const hh = time.getHours().toString();
+    const fileName = `userImage${hh}${mm}${ss}${ms}`;
+    console.log("image: ", payload);
+    minioClient.init();
+    const bucket = await minioClient.bucketCreate(bucketName);
+    if(bucket.err){
+      return wrapper.error(bucket.err);
+    }
+    const upload = await minioClient.objectUpload(bucketName, fileName, image);
+    if(upload.err){
+      return wrapper.error(upload.err);
+    }
+    const url = await minioClient.objectGetUrl(bucketName, fileName);
+    if(url.err){
+      return wrapper.error(url.err);
+    }
+    payload.imageUrl = url.data.toString();
     const result = await command.updateOneUser(params, payload);
     return result;
   }

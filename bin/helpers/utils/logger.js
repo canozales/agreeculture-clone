@@ -6,13 +6,13 @@ winston.emitErrs = true;
 
 const logDir = 'logs';
 
-const mkdirSync = function (logDir) {
-  try {
-    fs.mkdirSync(logDir);
-  } catch (err) {
-    if (err.code !== 'EXIST') throw err;
-  }
-};
+// const mkdirSync = function (logDir) {
+//   try {
+//     fs.mkdirSync(logDir);
+//   } catch (err) {
+//     if (err.code !== 'EXIST') throw err;
+//   }
+// };
 
 let logger = new winston.Logger({
   transports: [

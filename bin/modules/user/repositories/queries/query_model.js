@@ -7,7 +7,14 @@ const generalUser = () => {
     password:'',
     job:'',
     gender:'',
-    location:''
+    location:'',
+    bio:'',
+    social: {
+      facebook:'',
+      instagram:'',
+      linkedin:'',
+    },
+    poin: 0,
   };
   return model;
 };

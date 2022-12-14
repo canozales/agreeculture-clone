@@ -11,6 +11,13 @@ const generalUser = () => {
     job:'',
     gender:'',
     location:'',
+    bio:'',
+    social: {
+      facebook:'',
+      instagram:'',
+      linkedin:'',
+    },
+    poin: 0,
     resetPassToken: '',
     createdAt: '',
     updatedAt:''
