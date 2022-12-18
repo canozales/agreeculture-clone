@@ -50,6 +50,10 @@ const getBaseUrl = () => {
   return nconf.get('BASE_URL');
 };
 
+const getPortFE = () => {
+  return nconf.get('PORT_FE');
+};
+
 const getServicePort = () => {
   return nconf.get('PORT');
 };
@@ -67,5 +71,6 @@ module.exports = {
   getEmailAccount: getEmailAccount,
   getMinioAccount: getMinioAccount,
   getBaseUrl: getBaseUrl,
+  getPortFE: getPortFE,
   getServicePort: getServicePort
 };

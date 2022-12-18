@@ -96,3 +96,24 @@
 {"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-14T06:17:16.383Z"}
 {"context":"minioSdk-isBucketExist","message":"connect ECONNREFUSED 192.168.0.101:9000","scope":"error check bucket","level":"info","timestamp":"2022-12-14T06:17:18.442Z"}
 {"context":"minioSdk-bucketCreate","message":"connect ECONNREFUSED 192.168.0.101:9000","scope":"error create bucket","level":"info","timestamp":"2022-12-14T06:17:18.459Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:02:57.047Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:02:57.386Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:04:25.542Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:04:25.641Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:05:05.942Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:05:06.082Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:08:45.749Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:08:45.786Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:20:13.639Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:20:13.792Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:21:15.787Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:21:15.891Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:21:38.571Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:21:38.762Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:22:26.557Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:22:26.657Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:28:52.806Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:28:52.941Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:29:33.563Z"}
+{"context":"minioSdk-objectUpload","message":"filePath should be of type \"string\"","scope":"error upload object","level":"info","timestamp":"2022-12-17T08:29:33.704Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-17T08:34:06.931Z"}

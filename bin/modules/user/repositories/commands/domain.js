@@ -54,13 +54,8 @@ class User{
     const data = [payload];
     let view = model.generalUser();
     view = data.reduce((accumulator, value) => {
-      if(!validate.isEmpty(value.imageUrl)){accumulator.imageUrl = value.imageUrl;}
-      if(!validate.isEmpty(value.name)){accumulator.name = value.name;}
       if(!validate.isEmpty(value.email)){accumulator.email = value.email;}
       if(!validate.isEmpty(value.password)){accumulator.password = value.password;}
-      if(!validate.isEmpty(value.phone)){accumulator.phone = value.phone;}
-      if(!validate.isEmpty(value.country)){accumulator.country = value.country;}
-      if(!validate.isEmpty(value.role)){accumulator.role = value.role;}
       return accumulator;
     }, view);
     const document = view;
@@ -77,12 +72,16 @@ class User{
     }
     const validPassword = await bcrypt.compare(password, user.data.password);
     const userId = user.data._id;
+    const name = user.data.name;
+    const imageUrl = user.data.imageUrl;
     if(!validPassword){
       return wrapper.error('error', 'Password invalid!', 409);
     }
     const data = {
       userId,
-      email
+      email,
+      name,
+      imageUrl
     };
     const token =  await jwtAuth.generateToken(data);
     return wrapper.data({jwt: token}, '', 200);
@@ -107,7 +106,7 @@ class User{
 
     const account = config.getEmailAccount();
 
-    const servicePort = config.getServicePort();
+    const portFE = config.getPortFE();
 
     const message = {
       from: account.user,
@@ -115,7 +114,7 @@ class User{
       subject: 'Reset Account Password Link',
       html: `
       <h3>Please click the link below to reset your password</h3>
-      <p>${baseUrl}/${servicePort}/api/v1/reset-password/?token=${token}</p>
+      <p>${baseUrl}/${portFE}/dtp/forgot-password/${token}</p>
       `,
     };
     // console.log(message.html);
@@ -179,7 +178,7 @@ class User{
 
   async updateUser(params, payload){
     payload.updatedAt = new Date();
-    const image = payload.image;
+    const image = payload.userImage;
     const bucketName = 'user-profile-photos';
     const time = new Date();
     const ms = time.getMilliseconds().toString();

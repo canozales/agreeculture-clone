@@ -76,6 +76,7 @@ const getAllUsers = async (req, res, next) => {
 const putOneUser = async (req, res, next) => {
   const queryParam  = {'_id': req.params.userId};
   const payload = req.body;
+  payload.userImage = req.files['userImage']['path'];
   // console.log(payload);
   const validateParam = await validator.ifExistUser(queryParam);
   const putRequest = async (result) => {

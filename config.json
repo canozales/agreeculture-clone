@@ -2,6 +2,7 @@
     "SERVICE_NAME": "productService",
     "BASE_URL": "http://localhost",
     "PORT": 8000,
+    "PORT_FE": 3000,
     "ENVIRONMENT": "DEVELOPMENT",
     "AUTH_API_BASIC": [{"username": "telkom", "password": "da1c25d8-37c8-41b1-afe2-42dd4825bfea"}],
     "DSN_SENTRY_URL": "https://96d5b15d655e41cd81f2c15f82b8aec3:196f1781b900470f98bf362274d3f869@sentry.io/279589",
@@ -16,7 +17,7 @@
     "MOCKUP_TOPIC": "arn:aws:sns:ap-southeast-1:632537985342:MockupTopic",
     "DEVELOPMENT_MONGO_DATABASE_URL": "mongodb+srv://agreeadmin:pw7Xdc6GyZ6xTH0i@agreedbcluster.tfczsv8.mongodb.net/agreeUserDB",
     "MINIO": {
-        "endPoint": "192.168.0.101",
+        "endPoint": "172.29.0.1",
         "port": 9000,
         "useSSL": false,
         "accessKey": "admin",

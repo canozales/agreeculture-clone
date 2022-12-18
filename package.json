@@ -39,6 +39,7 @@
     "bindata": "^0.0.2",
     "chai-http": "^4.0.0",
     "cleanup-dependencies": "0.0.6",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "elastic-apm-node": "^3.38.0",
