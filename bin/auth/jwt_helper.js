@@ -22,9 +22,9 @@ const verifyToken = async (req, res, next) => {
     decodedToken = jwt.verify(token, config.getSecretToken());
   } catch (error) {
     if(error instanceof jwt.TokenExpiredError){
-      wrapper.response(res, 'fail', result, 'Access token expired!', 401);
+      return wrapper.response(res, 'fail', result, 'Access token expired!', 401);
     }else{
-      wrapper.response(res, 'fail', result, 'Token is not valid!', 401);
+      return wrapper.response(res, 'fail', result, 'Token is not valid!', 401);
     }
   }
   const userId = decodedToken.userId;
@@ -37,9 +37,12 @@ const verifyToken = async (req, res, next) => {
   }).then( async (response) => {
     const json = await response.json();
     const id = json['data']['_id'];
-    if( id != userId){
-      wrapper.response(res, 'fail', result, 'test!', 403);
+    if( id != userId ){
+      return wrapper.response(res, 'fail', result, 'Invalid user!', 403);
     }
+  })
+  .catch((error) => {
+    return wrapper.response(error, 'fail', result, 'Invalid token!', 403);
   });
   req.userId = userId;
   next();

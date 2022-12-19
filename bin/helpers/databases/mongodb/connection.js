@@ -36,7 +36,7 @@ const createConnectionPool = async () => {
 };
 
 const createConnection = async (config) => {
-  const options = {poolSize:50,keepAlive:15000,socketTimeoutMS:15000,connectTimeoutMS:15000};
+  const options = {poolSize:50,keepAlive:15000,socketTimeoutMS:15000,connectTimeoutMS:15000,useUnifiedTopology:true};
   try{
     const connection = await Mongo.connect(config,options);
     return wrapper.data(connection);
