@@ -12,6 +12,16 @@ const getOneArticle = async (queryParam) => {
   return result;
 };
 
+const getByAuthor = async (queryParam) => {
+  const getQuery = async (queryParam) => {
+    const article = new Article(queryParam);
+    const result = await article.viewByAuthor();
+    return result;
+  };
+  const result = await getQuery(queryParam);
+  return result;
+};
+
 
 const getAllArticles = async (queryParam) => {
   const getQuery = async (queryParam) => {
@@ -27,5 +37,6 @@ const getAllArticles = async (queryParam) => {
 
 module.exports = {
   getOneArticle : getOneArticle,
+  getByAuthor: getByAuthor, 
   getAllArticles : getAllArticles
 };

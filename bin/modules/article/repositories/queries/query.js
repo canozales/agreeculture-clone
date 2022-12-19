@@ -10,6 +10,14 @@ const findOneArticle = async (parameter) => {
   return recordset;
 };
 
+const findByAuthor = async (userId) => {
+  parameter = {$and:[userId]};
+  const db = new Mongo(config.getDevelopmentDB());
+  db.setCollection('Article');
+  const recordset = await db.findMany(parameter);
+  return recordset;
+};
+
 const findAllArticles = async (parameter) => {
   parameter = {$and:[parameter]};
   const db = new Mongo(config.getDevelopmentDB());
@@ -21,5 +29,6 @@ const findAllArticles = async (parameter) => {
 
 module.exports = {
   findOneArticle: findOneArticle,
+  findByAuthor: findByAuthor,
   findAllArticles: findAllArticles
 };

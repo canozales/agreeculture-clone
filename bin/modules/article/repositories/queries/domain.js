@@ -13,8 +13,13 @@ class Article{
   constructor(param){
     this.id = param.id;
     this.judul = param.judul;
+    this.subjudul = param.subjudul;
+    this.iamge = param.iamge;
     this.author = param.author;
     this.category = param.category;
+    this.belongsTo = param.belongsTo;
+    this.content = param.content;
+    this.status = param.status;
     this.createdAt =  param.createdAt;
     this.updatedAt = param.updatedAt;
   }
@@ -22,6 +27,17 @@ class Article{
   async viewOneArticle(){
     const param = {'id': this.id};
     const result = await query.findOneArticle(param);
+
+    if(result.err){
+      return result;
+    }
+    return wrapper.data(result.data);
+
+  }
+
+  async viewByAuthor(){
+    const param = {'Author': this.userId};
+    const result = await query.findAllArticles(param);
 
     if(result.err){
       return result;

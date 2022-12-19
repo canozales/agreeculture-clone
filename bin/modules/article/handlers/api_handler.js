@@ -24,6 +24,26 @@ const getOneArticle = async (req, res, next) => {
   sendResponse(await getRequest(validateParam));
 };
 
+const getByAuthor = async (req, res, next) => {
+  const queryParam = req.params;
+  const validateParam = await validator.isValidParamGetByAuthor(queryParam);
+
+  const getRequest = async (result) => {
+    if(result.err){
+      return result;
+    }
+    return await queryHandler.getByAuthor(queryParam);
+
+  };
+
+  const sendResponse = async (result) => {
+    (result.err) ? wrapper.response(res,'fail',result) :
+      wrapper.response(res, 'success', result, 'Your Request Has Been Processed');
+  };
+
+  sendResponse(await getRequest(validateParam));
+};
+
 
 const getAllArticles = async (req, res, next) => {
   const queryParam = req.params;
@@ -63,22 +83,22 @@ const postOneArticle = async (req, res, next) => {
   sendResponse(await postRequest(validateParam));
 };
 
-const patchOneArticle = async (req, res, next) => {
+const putOneArticle = async (req, res, next) => {
   const id  = req.params;
   const payload = req.body;
   const validateParam = await validator.ifExistArticle(payload);
-  const patchRequest = async (result) => {
+  const putRequest = async (result) => {
     if(result.err){
       return result;
     }
-    return await commandHandler.patchOneArticle(id, payload);
+    return await commandHandler.putOneArticle(id, payload);
 
   };
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res,'fail',result) :
       wrapper.response(res,'success',result,'Your Request Has Been Processed');
   };
-  sendResponse(await patchRequest(validateParam));
+  sendResponse(await putRequest(validateParam));
 };
 
 const deleteOneArticle = async (req, res, next) => {
@@ -101,7 +121,8 @@ const deleteOneArticle = async (req, res, next) => {
 module.exports = {
   getOneArticle: getOneArticle,
   getAllArticles: getAllArticles,
+  getByAuthor: getByAuthor,
   postOneArticle: postOneArticle,
-  patchOneArticle: patchOneArticle,
+  putOneArticle: putOneArticle,
   deleteOneArticle: deleteOneArticle
 };

@@ -1,10 +1,15 @@
 const generalArticle = () => {
   const model = {
-    id:'',
+    _id:'',
+    userId:'',
     judul:'',
+    subjudul:'',
+    image:'',
     author:'',
     category:[],
-    content:'',
+    belongsTo:'',
+    content: '',
+    status:'',
     createdAt:'',
     updatedAt:'',
   };

@@ -18,14 +18,43 @@ const isValidParamGetOneArticle = async (payload) => {
   let constraints = {};
   let values = {};
   constraints[payload.judul] = {length: {minimum: 3}};
+  constraints[payload.subjudul] = {length: {minimum: 3}};
+  constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
   constraints[payload.category] = {length: {minimum: 3}};
- // constraints[payload.harga] = {length: {minimum: 4}};
+  constraints[payload.belongsTo] = {length: {minimum: 3}};
+  constraints[payload.content] = {length: {minimum: 3}};
+  constraints[payload.status] = {length: {minimum: 3}};
   values[payload.judul] = payload.judul;
+  values[payload.subjudul] = payload.subjudul;
+  values[payload.image] = payload.image;
   values[payload.author] = payload.author;
   values[payload.category] = payload.category;
-  //values[payload.harga] = payload.harga;
+  values[payload.belongsTo] = payload.belongsTo;
+  values[payload.content] = payload.content;
+  values[payload.status] = payload.status;
+  return await validateConstraints(values,constraints);
+};
 
+const isValidParamGetByAuthor = async (payload) => {
+  let constraints = {};
+  let values = {};
+  constraints[payload.judul] = {length: {minimum: 3}};
+  constraints[payload.subjudul] = {length: {minimum: 3}};
+  constraints[payload.image] = {length: {minimum: 5}};
+  constraints[payload.author] = {length: {minimum: 3}};
+  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.belongsTo] = {length: {minimum: 3}};
+  constraints[payload.content] = {length: {minimum: 3}};
+  constraints[payload.status] = {length: {minimum: 3}};
+  values[payload.judul] = payload.judul;
+  values[payload.subjudul] = payload.subjudul;
+  values[payload.image] = payload.image;
+  values[payload.author] = payload.author;
+  values[payload.category] = payload.category;
+  values[payload.belongsTo] = payload.belongsTo;
+  values[payload.content] = payload.content;
+  values[payload.status] = payload.status;
   return await validateConstraints(values,constraints);
 };
 
@@ -33,13 +62,21 @@ const isValidParamGetAllArticles = async (payload) => {
   let constraints = {};
   let values = {};
   constraints[payload.judul] = {length: {minimum: 3}};
+  constraints[payload.subjudul] = {length: {minimum: 3}};
+  constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
-  constraints[payload.category] = {length: {minimum: 1}};
-  //constraints[payload.harga] = {length: {minimum: 4}};
+  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.belongsTo] = {length: {minimum: 3}};
+  constraints[payload.content] = {length: {minimum: 3}};
+  constraints[payload.status] = {length: {minimum: 3}};
   values[payload.judul] = payload.judul;
+  values[payload.subjudul] = payload.subjudul;
+  values[payload.image] = payload.image;
   values[payload.author] = payload.author;
   values[payload.category] = payload.category;
-  //values[payload.harga] = payload.harga;
+  values[payload.belongsTo] = payload.belongsTo;
+  values[payload.content] = payload.content;
+  values[payload.status] = payload.status;
   return await validateConstraints(values,constraints);
 };
 
@@ -47,13 +84,21 @@ const isValidParamPostOneArticle = async (payload) => {
   let constraints = {};
   let values = {};
   constraints[payload.judul] = {length: {minimum: 3}};
+  constraints[payload.subjudul] = {length: {minimum: 3}};
+  constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
-  constraints[payload.category] = {length: {minimum: 1}};
-  //constraints[payload.harga] = {length: {minimum: 4}};
+  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.belongsTo] = {length: {minimum: 3}};
+  constraints[payload.content] = {length: {minimum: 3}};
+  constraints[payload.status] = {length: {minimum: 3}};
   values[payload.judul] = payload.judul;
+  values[payload.subjudul] = payload.subjudul;
+  values[payload.image] = payload.image;
   values[payload.author] = payload.author;
   values[payload.category] = payload.category;
-  //values[payload.harga] = payload.harga;
+  values[payload.belongsTo] = payload.belongsTo;
+  values[payload.content] = payload.content;
+  values[payload.status] = payload.status;
   return await validateConstraints(values,constraints);
 };
 
@@ -69,5 +114,6 @@ module.exports = {
   isValidParamGetOneArticle: isValidParamGetOneArticle,
   isValidParamGetAllArticles: isValidParamGetAllArticles,
   isValidParamPostOneArticle: isValidParamPostOneArticle,
+  isValidParamGetByAuthor: isValidParamGetByAuthor,
   ifExistArticle: ifExistArticle,
 };

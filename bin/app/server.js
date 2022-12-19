@@ -14,6 +14,7 @@ const project = require('../../package.json');
 const basicAuth = require('../auth/basic_auth_helper');
 // const jwtAuth = require('../auth/jwt_auth_helper');
 const wrapper = require('../helpers/utils/wrapper');
+const jwtAuth = require('../auth/jwt_helper');
 // const sentryLog = require('../helpers/components/sentry/sentry_log');
 // const logger = require('../helpers/utils/logger');
 const corsMiddleware = require('restify-cors-middleware');
@@ -62,10 +63,11 @@ let AppServer = function(){
 
   //Article
   this.server.post('/api/v1/article/', articleHandler.postOneArticle);
-  this.server.get('/api/v1/article/', articleHandler.getAllArticles);
-  this.server.get('/api/v1/article/:id', articleHandler.getOneArticle);
-  this.server.del('/api/v1/article/:id', articleHandler.deleteOneArticle);
-  this.server.patch('/api/v1/article/:id', articleHandler.patchOneArticle);
+  this.server.get('/api/v1/article/', jwtAuth.verifyToken, articleHandler.getAllArticles);
+  this.server.get('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.getOneArticle);
+  //this.server.get('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.getByAuthor);
+  this.server.del('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.deleteOneArticle);
+  this.server.patch('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.putOneArticle);
 };
 
 module.exports = AppServer;

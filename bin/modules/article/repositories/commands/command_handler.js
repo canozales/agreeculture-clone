@@ -10,7 +10,7 @@ const postOneArticle = async (payload) => {
   return postCommand(payload);
 };
 
-const patchOneArticle = async (id, payload) => {
+const putOneArticle = async (id, payload) => {
   const article = new Article();
   const putCommand = async (id, payload) => {
     return await article.updateArticle(id, payload);
@@ -29,6 +29,6 @@ const deleteOneArticle = async (id) => {
 
 module.exports = {
   postOneArticle : postOneArticle,
-  patchOneArticle : patchOneArticle,
+  putOneArticle : putOneArticle,
   deleteOneArticle : deleteOneArticle
 };

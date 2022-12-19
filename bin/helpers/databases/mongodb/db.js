@@ -151,12 +151,10 @@ class DB{
       if(data.result.nModified>=0){
         const nModified = data.result.nModified;
         const recordset = await this.findOne(parameter);
-        // console.log(parameter);
-        // console.log(recordset);
         if(nModified===0){
           return wrapper.data(recordset.data,'created',201);
         }
-        return wrapper.data(recordset.data,'updated',204);
+        return wrapper.data(recordset.data,'updated',200);
 
       }
     }catch(err){
