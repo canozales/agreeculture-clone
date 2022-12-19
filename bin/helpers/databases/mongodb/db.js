@@ -38,7 +38,6 @@ class DB{
       const connection = cacheConnection.db(dbName);
       const db = connection.collection(collectionName);
       const recordset = await db.findOne(parameter);
-      console.log('params: ', parameter);
       if(validate.isEmpty(recordset)){
         return wrapper.error('Data Not Found','Please Try Another Input',404);
       }
@@ -148,7 +147,7 @@ class DB{
       const connection = cacheConnection.db(dbName);
       const db = connection.collection(collectionName);
       const data = await db.update(parameter,updateQuery,{ upsert: true });
-      console.log(data.result);
+      // console.log(data.result);
       if(data.result.nModified>=0){
         const nModified = data.result.nModified;
         const recordset = await this.findOne(parameter);

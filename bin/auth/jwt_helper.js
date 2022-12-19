@@ -40,7 +40,7 @@ const verifyToken = async (req, res, next) => {
     if( id != userId){
       wrapper.response(res, 'fail', result, 'test!', 403);
     }
-  })
+  });
   req.userId = userId;
   next();
 };
