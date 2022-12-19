@@ -146,6 +146,7 @@ class DB{
       const cacheConnection = result.data.db;
       const connection = cacheConnection.db(dbName);
       const db = connection.collection(collectionName);
+      console.log("uq: ", updateQuery);
       const data = await db.update(parameter,updateQuery,{ upsert: true });
       // console.log(data.result);
       if(data.result.nModified>=0){

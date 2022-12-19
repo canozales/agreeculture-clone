@@ -23,9 +23,8 @@ const verifyToken = async (req, res, next) => {
   } catch (error) {
     if(error instanceof jwt.TokenExpiredError){
       return wrapper.response(res, 'fail', result, 'Access token expired!', 401);
-    }else{
-      return wrapper.response(res, 'fail', result, 'Token is not valid!', 401);
     }
+    return wrapper.response(res, 'fail', result, 'Token is not valid!', 401);
   }
   const userId = decodedToken.userId;
   // const param = {'_id': userId};
@@ -41,10 +40,10 @@ const verifyToken = async (req, res, next) => {
       return wrapper.response(res, 'fail', result, 'Invalid user!', 403);
     }
   })
-  .catch((error) => {
-    return wrapper.response(error, 'fail', result, 'Invalid token!', 403);
-  });
-  req.userId = userId;
+    .catch((error) => {
+      return wrapper.response(error, 'fail', result, 'Invalid token!', 403);
+    });
+  req.userData = decodedToken;
   next();
 };
 

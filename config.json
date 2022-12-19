@@ -16,9 +16,10 @@
     "MOCKUP_TOPIC": "arn:aws:sns:ap-southeast-1:632537985342:MockupTopic",
     "DEVELOPMENT_MONGO_DATABASE_URL": "mongodb+srv://agreeadmin:pw7Xdc6GyZ6xTH0i@agreedbcluster.tfczsv8.mongodb.net/agreeArticleDB",
     "MINIO": {
-        "accessKey": "",
-        "secretKey": "",
-        "endPoint": "",
-        "pathStyle": true
+        "endPoint": "192.168.0.101",
+        "port": 9000,
+        "useSSL": false,
+        "accessKey": "admin",
+        "secretKey": "password"
     }
 }

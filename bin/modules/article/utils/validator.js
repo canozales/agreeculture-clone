@@ -21,7 +21,7 @@ const isValidParamGetOneArticle = async (payload) => {
   constraints[payload.subjudul] = {length: {minimum: 3}};
   constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
-  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.tags] = {length: {minimum: 3}};
   constraints[payload.belongsTo] = {length: {minimum: 3}};
   constraints[payload.content] = {length: {minimum: 3}};
   constraints[payload.status] = {length: {minimum: 3}};
@@ -29,7 +29,7 @@ const isValidParamGetOneArticle = async (payload) => {
   values[payload.subjudul] = payload.subjudul;
   values[payload.image] = payload.image;
   values[payload.author] = payload.author;
-  values[payload.category] = payload.category;
+  values[payload.tags] = payload.tags;
   values[payload.belongsTo] = payload.belongsTo;
   values[payload.content] = payload.content;
   values[payload.status] = payload.status;
@@ -43,7 +43,7 @@ const isValidParamGetByAuthor = async (payload) => {
   constraints[payload.subjudul] = {length: {minimum: 3}};
   constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
-  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.tags] = {length: {minimum: 3}};
   constraints[payload.belongsTo] = {length: {minimum: 3}};
   constraints[payload.content] = {length: {minimum: 3}};
   constraints[payload.status] = {length: {minimum: 3}};
@@ -51,7 +51,7 @@ const isValidParamGetByAuthor = async (payload) => {
   values[payload.subjudul] = payload.subjudul;
   values[payload.image] = payload.image;
   values[payload.author] = payload.author;
-  values[payload.category] = payload.category;
+  values[payload.tags] = payload.tags;
   values[payload.belongsTo] = payload.belongsTo;
   values[payload.content] = payload.content;
   values[payload.status] = payload.status;
@@ -65,7 +65,7 @@ const isValidParamGetAllArticles = async (payload) => {
   constraints[payload.subjudul] = {length: {minimum: 3}};
   constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
-  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.tags] = {length: {minimum: 3}};
   constraints[payload.belongsTo] = {length: {minimum: 3}};
   constraints[payload.content] = {length: {minimum: 3}};
   constraints[payload.status] = {length: {minimum: 3}};
@@ -73,7 +73,7 @@ const isValidParamGetAllArticles = async (payload) => {
   values[payload.subjudul] = payload.subjudul;
   values[payload.image] = payload.image;
   values[payload.author] = payload.author;
-  values[payload.category] = payload.category;
+  values[payload.tags] = payload.tags;
   values[payload.belongsTo] = payload.belongsTo;
   values[payload.content] = payload.content;
   values[payload.status] = payload.status;
@@ -87,7 +87,7 @@ const isValidParamPostOneArticle = async (payload) => {
   constraints[payload.subjudul] = {length: {minimum: 3}};
   constraints[payload.image] = {length: {minimum: 5}};
   constraints[payload.author] = {length: {minimum: 3}};
-  constraints[payload.category] = {length: {minimum: 3}};
+  constraints[payload.tags] = {length: {minimum: 3}};
   constraints[payload.belongsTo] = {length: {minimum: 3}};
   constraints[payload.content] = {length: {minimum: 3}};
   constraints[payload.status] = {length: {minimum: 3}};
@@ -95,7 +95,7 @@ const isValidParamPostOneArticle = async (payload) => {
   values[payload.subjudul] = payload.subjudul;
   values[payload.image] = payload.image;
   values[payload.author] = payload.author;
-  values[payload.category] = payload.category;
+  values[payload.tags] = payload.tags;
   values[payload.belongsTo] = payload.belongsTo;
   values[payload.content] = payload.content;
   values[payload.status] = payload.status;
@@ -105,8 +105,7 @@ const isValidParamPostOneArticle = async (payload) => {
 const ifExistArticle = async (payload) => {
   const db = new Mongo(config.getDevelopmentDB());
   db.setCollection('Article');
-  const parameter = {'id': payload.id};
-  const result = await db.findOne(parameter);
+  const result = await db.findOne(payload);
   return result;
 };
 

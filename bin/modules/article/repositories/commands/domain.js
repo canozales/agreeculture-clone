@@ -14,6 +14,7 @@ const wrapper = require('../../../../helpers/utils/wrapper');
 // const Emitter = require('../../../../helpers/events/event_emitter');
 // const EventPublisher = require('../../../../helpers/events/event_publisher');
 // const jwt = require('jsonwebtoken');
+const minioClient = require('../../../../helpers/components/minio/sdk');
 
 class Article{
 
@@ -26,12 +27,13 @@ class Article{
     const data = [payload];
     let view = model.generalArticle();
     view = data.reduce((accumulator, value) => {
-      if(!validate.isEmpty(value.id)){accumulator.id = value.id;}
+      if(!validate.isEmpty(value._id)){accumulator._id = value._id;}
+      if(!validate.isEmpty(value.userId)){accumulator.userId = value.userId;}
       if(!validate.isEmpty(value.judul)){accumulator.judul = value.judul;}
       if(!validate.isEmpty(value.subjudul)){accumulator.subjudul = value.subjudul;}
       if(!validate.isEmpty(value.image)){accumulator.image = value.image;}
       if(!validate.isEmpty(value.author)){accumulator.author = value.author;}
-      if(!validate.isEmpty(value.category)){accumulator.category = value.category;}
+      if(!validate.isEmpty(value.tags)){accumulator.tags = value.tags;}
       if(!validate.isEmpty(value.belongsTo)){accumulator.belongsTo = value.belongsTo;}
       if(!validate.isEmpty(value.content)){accumulator.content = value.content;}
       if(!validate.isEmpty(value.status)){accumulator.status = value.status;}
@@ -44,28 +46,37 @@ class Article{
   }
 
   async updateArticle(params, payload){
-    const {judul} = payload;
-    const article = await query.findOnearticle({judul});
-    if(!article.err){
-      return wrapper.error('error', 'artikel belum ditambahkan sebelumnya/tidak ditemukan', 400);
+    const image = payload.image;
+    const bucketName = 'article-thumbnail';
+    const time = new Date();
+    const ms = time.getMilliseconds().toString();
+    const ss = time.getSeconds().toString();
+    const mm = time.getMinutes().toString();
+    const hh = time.getHours().toString();
+    const fileName = `articleThumbnail${hh}${mm}${ss}${ms}`;
+    // console.log('image: ', payload);
+    // const {judul} = payload;
+    // console.log("judul: ", judul);
+    // const article = await query.findOneArticle({judul});
+    // if(!article.err){
+    //   return wrapper.error('error', 'artikel belum ditambahkan sebelumnya/tidak ditemukan', 400);
+    // }
+    minioClient.init();
+    const bucket = await minioClient.bucketCreate(bucketName);
+    if(bucket.err){
+      return wrapper.error(bucket.err);
     }
-    const data = [payload];
-    let view = model.generalArticle();
-    view = data.reduce((accumulator, value) => {
-      if(!validate.isEmpty(value.id)){accumulator.id = value.id;}
-      if(!validate.isEmpty(value.judul)){accumulator.judul = value.judul;}
-      if(!validate.isEmpty(value.subjudul)){accumulator.subjudul = value.subjudul;}
-      if(!validate.isEmpty(value.image)){accumulator.image = value.image;}
-      if(!validate.isEmpty(value.author)){accumulator.author = value.author;}
-      if(!validate.isEmpty(value.category)){accumulator.category = value.category;}
-      if(!validate.isEmpty(value.belongsTo)){accumulator.belongsTo = value.belongsTo;}
-      if(!validate.isEmpty(value.content)){accumulator.content = value.content;}
-      if(!validate.isEmpty(value.status)){accumulator.status = value.status;}
-      return accumulator;
-    }, view);
-    const document = view;
-    document.updatedAt = new Date();
-    const result = await command.updateOneArticle(params, document);
+    const upload = await minioClient.objectUpload(bucketName, fileName, image);
+    if(upload.err){
+      return wrapper.error(upload.err);
+    }
+    const url = await minioClient.objectGetUrl(bucketName, fileName);
+    if(url.err){
+      return wrapper.error(url.err);
+    }
+    payload.image = url.data.toString();
+    payload.updatedAt = new Date();
+    const result = await command.updateOneArticle(params, payload);
     return result;
   }
 

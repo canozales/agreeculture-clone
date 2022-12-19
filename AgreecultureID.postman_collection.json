@@ -178,7 +178,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base-url-user}}/api/v1/user/d911fad8-160a-4347-b69b-c705ae1f557e",
+							"raw": "{{base-url-user}}/api/v1/user/97afa5c3-ed4e-45cc-9697-55c82eefd089",
 							"host": [
 								"{{base-url-user}}"
 							],
@@ -186,7 +186,7 @@
 								"api",
 								"v1",
 								"user",
-								"d911fad8-160a-4347-b69b-c705ae1f557e"
+								"97afa5c3-ed4e-45cc-9697-55c82eefd089"
 							]
 						}
 					},
@@ -204,7 +204,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base-url-user}}/api/v1/user/d22c4ccb-0480-45bb-af37-cefebd4f0a6e",
+							"raw": "{{base-url-user}}/api/v1/user/97afa5c3-ed4e-45cc-9697-55c82eefd089",
 							"host": [
 								"{{base-url-user}}"
 							],
@@ -212,7 +212,7 @@
 								"api",
 								"v1",
 								"user",
-								"d22c4ccb-0480-45bb-af37-cefebd4f0a6e"
+								"97afa5c3-ed4e-45cc-9697-55c82eefd089"
 							]
 						}
 					},
@@ -243,9 +243,9 @@
 									"type": "text"
 								},
 								{
-									"key": "image",
+									"key": "userImage",
 									"type": "file",
-									"src": []
+									"src": "/D:/Magang/Telkom DBT/Tugas Akhir DBT/user-service/temp/logo-agree.png"
 								}
 							]
 						},
@@ -282,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"2\",\r\n    \"judul\": \"artikel mantap2\", \r\n    \"subjudul\": \"artikel yang terpercaya kemantapannya\",\r\n    \"image\": \"ini gambar\",\r\n    \"author\": \"Ahmad\",\r\n    \"category\": [\"a\", \"b\", \"c\"],\r\n    \"belongsTo\": \"PT Ahmad Abadi Sentosa\",\r\n    \"content\": \"ini adalah sebuah artikel yang sangat mantap, sampai pembaca dibuat tidak bisa tidur setelah membacanya\",\r\n    \"status\": \"sudah mantap\"\r\n}",
+							"raw": "{\r\n    \"judul\": \"artikel mantap9\", \r\n    \"subjudul\": \"artikel yang terpercaya kemantapannya\",\r\n    \"image\": \"ini gambar\",\r\n    \"author\": \"Ahmad\",\r\n    \"category\": [\"a\", \"b\", \"c\"],\r\n    \"belongsTo\": \"PT Ahmad Abadi Sentosa\",\r\n    \"content\": \"ini adalah sebuah artikel yang sangat mantap, sampai pembaca dibuat tidak bisa tidur setelah membacanya\",\r\n    \"status\": \"sudah mantap\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -368,7 +368,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/article/1",
+							"raw": "{{base-url-article}}/api/v1/article/6a35722e-a81e-4c1b-8a6b-1b564396ad41",
 							"host": [
 								"{{base-url-article}}"
 							],
@@ -376,7 +376,7 @@
 								"api",
 								"v1",
 								"article",
-								"1"
+								"6a35722e-a81e-4c1b-8a6b-1b564396ad41"
 							]
 						}
 					},
@@ -394,16 +394,42 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"sellerId\": \"1\",\r\n    \"name\": \"alpukat\",\r\n    \"price\": \"10000\",\r\n    \"stock\": \"300\",\r\n    \"category\": \"buah\",\r\n    \"brand\": \"agreefarm\",\r\n    \"detail\": \"buah alpukat lokal\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "judul",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "subJudul",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Magang/Telkom DBT/Tugas Akhir DBT/user-service/temp/logo-agree.png"
+								},
+								{
+									"key": "tags",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "isiBerita",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "draft",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/article/1",
+							"raw": "{{base-url-article}}/api/v1/article/6a35722e-a81e-4c1b-8a6b-1b564396ad41",
 							"host": [
 								"{{base-url-article}}"
 							],
@@ -411,7 +437,7 @@
 								"api",
 								"v1",
 								"article",
-								"1"
+								"6a35722e-a81e-4c1b-8a6b-1b564396ad41"
 							]
 						}
 					},

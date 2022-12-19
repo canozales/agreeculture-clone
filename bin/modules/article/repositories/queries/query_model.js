@@ -6,7 +6,7 @@ const generalArticle = () => {
     subjudul:'',
     image:'',
     author:'',
-    category:[],
+    tags:[],
     belongsTo:'',
     content: '',
     status:'',

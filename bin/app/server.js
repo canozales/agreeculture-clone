@@ -67,7 +67,7 @@ let AppServer = function(){
   this.server.get('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.getOneArticle);
   //this.server.get('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.getByAuthor);
   this.server.del('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.deleteOneArticle);
-  this.server.patch('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.putOneArticle);
+  this.server.put('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.putOneArticle);
 };
 
 module.exports = AppServer;

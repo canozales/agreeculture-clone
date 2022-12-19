@@ -1,0 +1,24 @@
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:43:32.521Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:43:32.571Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"5cd781b6-d173-40d0-ab5e-ad9499f507e9\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:43:32.683Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:45:12.480Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:45:12.530Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"646e0592-45e0-49e2-b484-caf1f50bc24e\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:45:12.841Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:48:45.377Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"93efc091-6641-44dd-a4a6-eb0046a7c185\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:48:45.579Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:52:38.297Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"2913ff55-b4bd-49e5-8264-92de76a0f904\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:52:38.402Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:52:58.814Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"737b1479-c130-45ae-aa18-2339ba0b3d58\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:52:58.929Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:55:03.051Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"68736801-e4f5-4ea5-8809-99e4225e44b7\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:55:03.155Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:55:56.049Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"3c0655c9-7d6f-4b8f-b40b-4070996c44b0\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:55:56.154Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:58:19.421Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"99535a1e-cf27-4be6-aefa-bbaec8914047\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:58:19.524Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T15:59:59.439Z"}
+{"context":"mongodb-upsertOne","message":"After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"c3b7386d-b2fc-4058-8843-ebb4d5ca63e5\"","scope":"Error upsert data in mongodb","level":"info","timestamp":"2022-12-19T15:59:59.546Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T16:01:43.284Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T16:02:22.931Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T16:24:53.005Z"}
+{"context":"minio-init","message":"minio initialized","scope":"info","level":"info","timestamp":"2022-12-19T16:25:23.765Z"}

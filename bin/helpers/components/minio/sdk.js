@@ -2,11 +2,16 @@ const Minio = require('minio');
 const config = require('../../../infra/configs/global_config');
 const wrapper = require('../../utils/wrapper');
 const logger = require('../../utils/logger');
+
 let minioClient;
 
 const init = () => {
-  minioClient = new Minio.Client(config.get('/minio'));
+  minioClient = new Minio.Client(config.getMinioAccount());
   logger.log('minio-init', 'minio initialized', 'info');
+  // const buckets = minioClient.listBuckets();
+  // buckets.then(function(result){
+  //   console.log("buckets: ", result);
+  // })
 };
 
 const isBucketExist = (bucketName) => {
@@ -90,5 +95,6 @@ module.exports = {
   objectUpload,
   objectGetUrl,
   objectDownload,
-  objectRemove
+  objectRemove,
+  isBucketExist
 };

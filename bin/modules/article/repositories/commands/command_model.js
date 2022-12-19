@@ -8,11 +8,11 @@ const generalArticle = () => {
     subjudul:'',
     image:'',
     author:'',
-    category:[],
+    tags:[],
     belongsTo:'',
     content: '',
     status:'',
-    createdAt: '',
+    createdAt:'',
     updatedAt:'',
   };
   return model;
