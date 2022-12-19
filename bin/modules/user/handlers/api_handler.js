@@ -33,7 +33,7 @@ const postDataRegister = async (req, res, next) => {
         return result;
       }
       return await commandHandler.postDataRegister(payload);
-  
+
     };
     const sendResponse = async (result) => {
       (result.err) ? wrapper.response(res,'fail',result) :
