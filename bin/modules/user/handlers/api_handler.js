@@ -25,20 +25,27 @@ const postDataLogin = async (req, res, next) => {
 };
 
 const postDataRegister = async (req, res, next) => {
-  const payload = req.body;
-  const validateParam = await validator.isValidParamPostDataRegister(payload);
-  const postRequest = async (result) => {
-    if(result.err){
-      return result;
-    }
-    return await commandHandler.postDataRegister(payload);
-
-  };
-  const sendResponse = async (result) => {
-    (result.err) ? wrapper.response(res,'fail',result) :
-      wrapper.response(res,'success',result,'Registration success');
-  };
-  sendResponse(await postRequest(validateParam));
+  try {
+    const payload = req.body;
+    const validateParam = await validator.isValidParamPostDataRegister(payload);
+    const postRequest = async (result) => {
+      if(result.err){
+        return result;
+      }
+      return await commandHandler.postDataRegister(payload);
+  
+    };
+    const sendResponse = async (result) => {
+      (result.err) ? wrapper.response(res,'fail',result) :
+        wrapper.response(res,'success',wrapper.data({
+          _id: result.data._id,
+          email: result.data.email,
+        }),'Registration success', 201);
+    };
+    sendResponse(await postRequest(validateParam));
+  } catch (err) {
+    return wrapper.error('error', 'Email telah terdaftar', 500);
+  }
 };
 
 const getUser = async (req, res, next) => {

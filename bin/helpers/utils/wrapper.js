@@ -9,7 +9,7 @@ const paginationData = (data,meta,description='',code=200) => {
 };
 
 const error = (err,description,code=500) => {
-  return {err:err,data:'',message:description,code:code};
+  return {err:err,data:{message:description},code:code};
 };
 
 const response = (res,type,result,message,code) => {
