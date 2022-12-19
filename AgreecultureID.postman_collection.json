@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\":\"\"\r\n}",
+									"raw": "{\r\n    \"email\":\"bangshadif@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -84,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"aaa\",\r\n    \"email\":\"i@a.a\",\r\n    \"password\": \"1234\",\r\n    \"confirmPassword\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"email\":\"l@a.a\",\r\n    \"password\": \"1234\",\r\n    \"confirmPassword\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -119,7 +119,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"\",\r\n    \"password\": \"1237\"\r\n}",
+							"raw": "{\r\n    \"email\":\"bangshadif@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,18 +230,29 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"phone\": \"18123456789\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "job",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{base-url}}/api/v1/user/97afa5c3-ed4e-45cc-9697-55c82eefd089",
+							"raw": "{{base-url-user}}/api/v1/user/97afa5c3-ed4e-45cc-9697-55c82eefd089",
 							"host": [
-								"{{base-url}}"
+								"{{base-url-user}}"
 							],
 							"path": [
 								"api",
@@ -262,10 +273,16 @@
 					"name": "Add Article",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{jwt-token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"1\",\r\n    \"sellerId\": \"1\",\r\n    \"name\": \"alpukat\",\r\n    \"price\": \"10000\",\r\n    \"stock\": \"200\",\r\n    \"category\": \"buah\",\r\n    \"brand\": \"agreefarm\",\r\n    \"detail\": \"buah alpukat lokal\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"2\",\r\n    \"judul\": \"artikel mantap2\", \r\n    \"subjudul\": \"artikel yang terpercaya kemantapannya\",\r\n    \"image\": \"ini gambar\",\r\n    \"author\": \"Ahmad\",\r\n    \"category\": [\"a\", \"b\", \"c\"],\r\n    \"belongsTo\": \"PT Ahmad Abadi Sentosa\",\r\n    \"content\": \"ini adalah sebuah artikel yang sangat mantap, sampai pembaca dibuat tidak bisa tidur setelah membacanya\",\r\n    \"status\": \"sudah mantap\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,14 +290,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/product/",
+							"raw": "{{base-url-article}}/api/v1/article/",
 							"host": [
 								"{{base-url-article}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"product",
+								"article",
 								""
 							]
 						}
@@ -291,16 +308,22 @@
 					"name": "Get All Articles",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{jwt-token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/product/",
+							"raw": "{{base-url-article}}/api/v1/article/",
 							"host": [
 								"{{base-url-article}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"product",
+								"article",
 								""
 							]
 						}
@@ -311,17 +334,23 @@
 					"name": "Get Detail Article",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{jwt-token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/product/1",
+							"raw": "{{base-url-article}}/api/v1/article/6a35722e-a81e-4c1b-8a6b-1b564396ad41",
 							"host": [
 								"{{base-url-article}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"product",
-								"1"
+								"article",
+								"6a35722e-a81e-4c1b-8a6b-1b564396ad41"
 							]
 						}
 					},
@@ -331,16 +360,22 @@
 					"name": "Delete Article",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{jwt-token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/product/1",
+							"raw": "{{base-url-article}}/api/v1/article/1",
 							"host": [
 								"{{base-url-article}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"product",
+								"article",
 								"1"
 							]
 						}
@@ -368,14 +403,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base-url-article}}/api/v1/product/1",
+							"raw": "{{base-url-article}}/api/v1/article/1",
 							"host": [
 								"{{base-url-article}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"product",
+								"article",
 								"1"
 							]
 						}

@@ -13,15 +13,15 @@ const wrapper = require('../../../../helpers/utils/wrapper');
 // const SNS = require('../../../../helpers/components/aws-sns/sns');
 // const Emitter = require('../../../../helpers/events/event_emitter');
 // const EventPublisher = require('../../../../helpers/events/event_publisher');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 class Article{
 
   async addNewArticle(payload){
-    const {judul, content } = payload;
+    const {judul} = payload;
     const article = await query.findOneArticle({judul});
     if(!article.err){
-      return wrapper.error('error', 'artikel telah ditambahkan sebelumnya/sudah ada', 400)
+      return wrapper.error('error', 'artikel telah ditambahkan sebelumnya/sudah ada', 400);
     }
     const data = [payload];
     let view = model.generalArticle();
@@ -44,10 +44,10 @@ class Article{
   }
 
   async updateArticle(params, payload){
-    const {judul, content } = payload;
+    const {judul} = payload;
     const article = await query.findOnearticle({judul});
     if(!article.err){
-      return wrapper.error('error', 'artikel belum ditambahkan sebelumnya/tidak ditemukan', 400)
+      return wrapper.error('error', 'artikel belum ditambahkan sebelumnya/tidak ditemukan', 400);
     }
     const data = [payload];
     let view = model.generalArticle();

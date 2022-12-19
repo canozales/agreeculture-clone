@@ -11,7 +11,8 @@ const wrapper = require('../../../../helpers/utils/wrapper');
 
 class Article{
   constructor(param){
-    this.id = param.id;
+    this._id = param._id;
+    this.userId = param.userId;
     this.judul = param.judul;
     this.subjudul = param.subjudul;
     this.iamge = param.iamge;
@@ -25,7 +26,7 @@ class Article{
   }
 
   async viewOneArticle(){
-    const param = {'id': this.id};
+    const param = {'_id': this._id};
     const result = await query.findOneArticle(param);
 
     if(result.err){

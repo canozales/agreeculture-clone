@@ -8,6 +8,7 @@ const getOneArticle = async (queryParam) => {
     const result = await article.viewOneArticle();
     return result;
   };
+  // console.log('qp2: ', queryParam);
   const result = await getQuery(queryParam);
   return result;
 };
@@ -37,6 +38,6 @@ const getAllArticles = async (queryParam) => {
 
 module.exports = {
   getOneArticle : getOneArticle,
-  getByAuthor: getByAuthor, 
+  getByAuthor: getByAuthor,
   getAllArticles : getAllArticles
 };

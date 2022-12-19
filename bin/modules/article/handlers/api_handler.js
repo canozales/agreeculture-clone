@@ -5,7 +5,8 @@ const queryHandler = require('../repositories/queries/query_handler');
 const commandHandler = require('../repositories/commands/command_handler');
 
 const getOneArticle = async (req, res, next) => {
-  const queryParam = req.params;
+  const queryParam = {'_id': req.params.id};
+  // console.log('qp: ', queryParam);
   const validateParam = await validator.isValidParamGetOneArticle(queryParam);
 
   const getRequest = async (result) => {

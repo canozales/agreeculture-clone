@@ -38,6 +38,7 @@ class DB{
       const connection = cacheConnection.db(dbName);
       const db = connection.collection(collectionName);
       const recordset = await db.findOne(parameter);
+      console.log('params: ', parameter);
       if(validate.isEmpty(recordset)){
         return wrapper.error('Data Not Found','Please Try Another Input',404);
       }

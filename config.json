@@ -10,6 +10,7 @@
         "secretAccessKey": "8riz0UOEAXxn7kJevXVpAUAy6M3KHj1qlSpw8J1q",
         "region": "ap-southeast-1"
     },
+    "SECRET_TOKEN": "234q34c5q3x45x1345x1",
     "PUBLIC_KEY_PATH": "public.pem",
     "PRIVATE_KEY_PATH": "private.pem",
     "MOCKUP_TOPIC": "arn:aws:sns:ap-southeast-1:632537985342:MockupTopic",

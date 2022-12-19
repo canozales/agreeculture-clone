@@ -26,6 +26,10 @@ const getAWSCredential = () => {
   return nconf.get('AWS_CREDENTIAL');
 };
 
+const getSecretToken = () => {
+  return nconf.get('SECRET_TOKEN');
+};
+
 const getPublicKey = () => {
   return nconf.get('PUBLIC_KEY_PATH');
 };
@@ -41,6 +45,7 @@ module.exports = {
   getDevelopmentDBMySQL: getDevelopmentDBMySQL,
   getMockupTopic: getMockupTopic,
   getAWSCredential: getAWSCredential,
+  getSecretToken: getSecretToken,
   getPublicKey: getPublicKey,
   getPrivateKey: getPrivateKey
 };

@@ -22,7 +22,7 @@ const articleHandler = require('../modules/article/handlers/api_handler');
 
 
 let crossOrigin = (req,res,next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   if ('OPTIONS' == req.method) {
@@ -62,7 +62,7 @@ let AppServer = function(){
   });
 
   //Article
-  this.server.post('/api/v1/article/', articleHandler.postOneArticle);
+  this.server.post('/api/v1/article/', jwtAuth.verifyToken, articleHandler.postOneArticle);
   this.server.get('/api/v1/article/', jwtAuth.verifyToken, articleHandler.getAllArticles);
   this.server.get('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.getOneArticle);
   //this.server.get('/api/v1/article/:id', jwtAuth.verifyToken, articleHandler.getByAuthor);
