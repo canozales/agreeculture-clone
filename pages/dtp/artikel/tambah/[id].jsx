@@ -34,7 +34,7 @@ const Tambah = () => {
   const [dialogueOpen, setDialogueOpen] = useState(false);
   const [warningOpen, setWarningOpen] = useState(false);
   const [pesanWarning, setPesanWarning] = useState('');
-
+  const today = new Date();
   const [judul, setJudul] = useState('');
   const [subJudul, setSubJudul] = useState('');
   const [pratinjau, setPratinjau] = useState(false);
@@ -518,7 +518,13 @@ const Tambah = () => {
                     sektor={tag}
                     text={judul}
                     image={gambarAkhir}
-                    date='28 November 2022'
+                    date={`${today.toLocaleDateString('default', {
+                      day: '2-digit',
+                    })} ${today.toLocaleDateString('default', {
+                      month: 'long',
+                    })} ${today.toLocaleDateString('default', {
+                      year: 'numeric',
+                    })}`}
                   />
                 </div>
               </div>
