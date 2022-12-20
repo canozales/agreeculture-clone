@@ -7,7 +7,7 @@ const LandingOne = (props) => {
       <div className='gambar flex-y-between-start'>
         <span>{props.textOne}</span>
         <span>{props.textTwo}</span>
-        <span>Saya Tertarik</span>
+        <span style={{ cursor: 'pointer' }}>Saya Tertarik</span>
       </div>
       <div className='sponsor'>
         <span>Dipercaya oleh Lembaga dan Perusahaan Besar</span>

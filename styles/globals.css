@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
 
 
+
 ::-webkit-scrollbar{
   width: .5rem;
   height: .6rem;
@@ -1389,10 +1390,16 @@ grid-template-columns: repeat(4, auto);
 /* Register */
 
 .register {
+  max-width: 1600px;
+  margin: auto;
   background-color: #fff;
   display: flex;
 }
-
+@media screen and (max-width: 1500px) {
+  .register {
+    margin-top: 5rem;
+  }
+}
 .register .kiri {
   background-color: #d8f3e4;
   flex: 1;
@@ -1682,11 +1689,14 @@ grid-template-columns: repeat(4, auto);
 /* Login */
 
 .login {
+  width: 99vw;
+  height: 100vw;
   background-color: #d8f3e4;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   position: relative;
+  margin: auto;
 }
 
 .login .kontainer {
@@ -1928,7 +1938,7 @@ grid-template-columns: repeat(4, auto);
   padding: 0 6rem;
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 10;
   display: flex;
   justify-content: space-between;
@@ -2119,7 +2129,7 @@ grid-template-columns: repeat(4, auto);
   padding: 0 6rem;
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 10;
 }
 
@@ -2852,7 +2862,7 @@ grid-template-columns: repeat(4, auto);
 }
 
 .home-3 .holding {
-  width: 67%;
+  width: 80%;
   display: flex;
   justify-content: space-evenly;
   align-items: center
@@ -2908,11 +2918,6 @@ grid-template-columns: repeat(4, auto);
   border-bottom-right-radius: .9rem;
 }
 
-@media screen and (max-width: 1900px) {
-  .home-3 .holding  {
-    width: 80%;
-  }
-}
 
 @media screen and (max-width: 1627px) {
   .home-3 .centering  {
@@ -3476,6 +3481,12 @@ grid-template-columns: repeat(4, auto);
   height: 25rem;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.kartu-berita:hover{
+  transform: scale(1.05);
 }
 
 .kartu-berita .gambar {
@@ -7299,4 +7310,17 @@ text-align: center;
 
 .tesapi .kartu span, .tesapi .kartu button{
   margin: .2rem;
+}
+
+.universal-wrap {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 1800px) {
+  .rangkaiKartu2 {
+    width: auto;
+    margin-left: 0;
+  }
 }

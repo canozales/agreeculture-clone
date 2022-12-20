@@ -4,8 +4,8 @@ import Link from 'next/link';
 import Layout from '../../Layout';
 
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import { deleteBerita } from '../../../api-helpers/frontend/utils';
-import { getBeritaByOwner } from '../../../api-helpers/frontend/utils';
+import { deleteBerita } from '../../../api-helpers/backend/utils';
+import { getBeritaByOwner } from '../../../api-helpers/backend/utils';
 import { Kartu1, Kartu2 } from '../../../components/dtp/Artikel';
 import { useRouter } from 'next/router';
 
@@ -17,12 +17,13 @@ import Cookies from 'js-cookie';
 const Artikel = () => {
   const [data, setData] = React.useState([]);
   const id = Cookies.get('id');
+  const jwt = Cookies.get('jwt');
   const router = useRouter();
   const [dialogueOpen, setDialogueOpen] = React.useState(false);
   const [idHapus, setIdHapus] = React.useState('');
 
   React.useEffect(() => {
-    getBeritaByOwner(id)
+    getBeritaByOwner(id, jwt)
       .then((x) => setData(x))
       .catch((err) => console.log(err));
   }, [id]);
@@ -133,7 +134,7 @@ const Artikel = () => {
           open={dialogueOpen}
           handleClose={() => setDialogueOpen(false)}
           command={() => {
-            deleteBerita(idHapus)
+            deleteBerita(idHapus, jwt)
               .then(() => {
                 router.reload(window.location.pathname);
               })

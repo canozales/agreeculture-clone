@@ -136,6 +136,8 @@ const landingThree = [
     image2: wave1,
     seri: 'kartu-1',
     textTombol: 'Saya Mau Baca',
+    link: '/landing/agree-partner',
+    color: '#1a994e',
   },
   {
     text: 'Permodalan untuk wirausaha pertanian dan petani kecil',
@@ -143,6 +145,8 @@ const landingThree = [
     image2: wave2,
     seri: 'kartu-1',
     textTombol: 'Saya Mau Baca',
+    link: '/landing/agree-modal',
+    color: '#2886c1',
   },
   {
     text: 'Jutaan produk berkualitas untuk menunjang bisnis Anda',
@@ -150,6 +154,8 @@ const landingThree = [
     image2: wave3,
     seri: 'kartu-1',
     textTombol: 'Saya Mau Baca',
+    link: '/landing/agree-market',
+    color: '#8fc646',
   },
   {
     text: 'Tingkatkan efisiensi dan produksi bisnis pertanian Anda dengan IoT Smart Farming',
@@ -157,6 +163,8 @@ const landingThree = [
     image2: wave4,
     seri: 'kartu-2',
     textTombol: 'Saya Mau Mempelajari Smart Framing',
+    link: '/landing/smart-farming',
+    color: '#4E9D4F',
   },
   {
     text: 'Temukan para ahli pertanian dan pelajari ilmu baru untuk bisnis pertanian Anda',
@@ -164,6 +172,8 @@ const landingThree = [
     image2: wave5,
     seri: 'kartu-2',
     textTombol: 'Buka Agreepedia',
+    link: '/agreepedia',
+    color: '#4E9D4F',
   },
 ];
 

@@ -10,15 +10,21 @@ const Kartu1 = ({ x, router, setIdHapus, setDialogueOpen }) => (
       className='gambar'
       width={500}
       height={500}
-      src={x.image ? x.image : nophoto}
+      src={x.image !== '' ? x.image : nophoto}
       alt='Gambar'
     ></Image>
     <span>{x.judul}</span>
-    <span>{`${new Date(x.updatedAt).toLocaleDateString('default', {
+    <span>{`${new Date(
+      x.updatedAt !== '' ? x.updatedAt : x.createdAt
+    ).toLocaleDateString('default', {
       day: '2-digit',
-    })} ${new Date(x.updatedAt).toLocaleDateString('default', {
+    })} ${new Date(
+      x.updatedAt !== '' ? x.updatedAt : x.createdAt
+    ).toLocaleDateString('default', {
       month: 'long',
-    })} ${new Date(x.updatedAt).toLocaleDateString('default', {
+    })} ${new Date(
+      x.updatedAt !== '' ? x.updatedAt : x.createdAt
+    ).toLocaleDateString('default', {
       year: 'numeric',
     })}`}</span>
     <span
@@ -70,12 +76,16 @@ const Kartu2 = ({ x, router, setIdHapus, setDialogueOpen }) => (
         className='gambar'
         width={500}
         height={500}
-        src={x.image ? x.image : nophoto}
+        src={x.image !== '' ? x.image : nophoto}
         alt='Gambar'
       ></Image>
       <span>{x.judul}</span>
     </div>
-    <span>{new Date(x.updatedAt).toLocaleDateString()}</span>
+    <span>
+      {new Date(
+        x.updatedAt !== '' ? x.updatedAt : x.createdAt
+      ).toLocaleDateString()}
+    </span>
 
     <span
       style={{

@@ -11,7 +11,7 @@ import {
 import BackTo from '../../components/BackTo';
 import Link from 'next/link';
 import Dialogue from '../../components/Dialogue';
-import { addUser } from '../../api-helpers/frontend/utils';
+import { addUser } from '../../api-helpers/backend/utils';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
@@ -210,12 +210,13 @@ const register = () => {
                 setPesanWarning('Pastikan Anda setuju dengan Ketentuan');
                 setWarningOpen(true);
               } else {
-                addUser({ email, password })
+                addUser({ email, password, password2 })
                   .then((x) => {
+                    console.log(x);
                     setDialogueOpen(true);
                   })
                   .catch((x) => {
-                    setPesanWarning(x.response.data.message);
+                    setPesanWarning(x.response.data.data.message);
                     setWarningOpen(true);
                   });
               }

@@ -52,7 +52,7 @@ const Agreepedia = () => {
           <div className='berita-utama'>
             {React.Children.toArray(
               landingPages.beritaAgreepedia.slice(4, 5).map((x) => (
-                <div className='berita2'>
+                <div style={{ cursor: 'pointer' }} className='berita2'>
                   <Image className='gambar' src={x.image} alt='image'></Image>
                   <div className='kanan'>
                     <span>{x.text}</span>

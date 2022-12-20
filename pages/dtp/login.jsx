@@ -8,12 +8,13 @@ import {
 } from 'react-icons/ai';
 import BackTo from '../../components/BackTo';
 import Link from 'next/link';
-import wave3 from '../../public/assets/images/wave3.png';
-import { userLogin } from '../../api-helpers/frontend/utils';
+import { userLogin } from '../../api-helpers/backend/utils';
 import Dialogue from '../../components/Dialogue';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Head from 'next/head';
+
+const jwt = require('jsonwebtoken');
 
 const login = () => {
   const [email, setEmail] = React.useState('');
@@ -30,6 +31,15 @@ const login = () => {
   const [pesanWarning, setPesanWarning] = React.useState(false);
 
   const router = useRouter();
+  const ref = React.useRef(null);
+
+  let rememberMe = false;
+  let rememberEmail;
+
+  if (Cookies.get('rememberMe')) {
+    rememberMe = true;
+    rememberEmail = Cookies.get('rememberEmail');
+  }
 
   return (
     <div className='login'>
@@ -53,6 +63,7 @@ const login = () => {
               setCorrectEmail(/\S+@\S+\.\S+/.test(x.target.value));
             }}
             type='text'
+            defaultValue={rememberMe ? rememberEmail : ''}
             placeholder='Masukkan email yang terdaftar'
             style={{
               border: !correctEmail ? '1px solid red' : '1px solid #4d4d4d',
@@ -107,7 +118,12 @@ const login = () => {
 
         <div className='lupa'>
           <div>
-            <input type='checkbox' id='cek1' />
+            <input
+              ref={ref}
+              type='checkbox'
+              id='cek1'
+              defaultChecked={rememberMe}
+            />
             <label htmlFor='cek1'>Ingat Saya</label>
           </div>
 
@@ -131,22 +147,31 @@ const login = () => {
             } else {
               userLogin({ email, password })
                 .then((x) => {
-                  localStorage.setItem('gambar', x.gambar);
-                  Cookies.set('id', x.id, { expires: 1 });
-                  Cookies.set(
-                    'nama',
-                    x.nama && x.nama !== undefined ? x.nama : x.email,
-                    {
-                      expires: 1,
-                    }
+                  const { userId, email, name, imageUrl } = jwt.verify(
+                    x,
+                    '234q34c5q3x45x1345x1'
                   );
+                  if (ref.current.checked) {
+                    Cookies.set('rememberMe', true);
+                    Cookies.set('rememberEmail', email);
+                  } else {
+                    Cookies.set('rememberMe', false);
+                  }
+
+                  localStorage.setItem('gambar', imageUrl);
+                  Cookies.set('id', userId, { expires: 1 });
+                  Cookies.set('jwt', x, { expires: 1 });
+                  Cookies.set('nama', name !== '' ? name : email, {
+                    expires: 1,
+                  });
                 })
                 .then(() => {
                   setDialogueOpen(true);
                 })
                 .catch((x) => {
+                  console.log(x.response.data.data.message);
                   setPesanJudul('Tidak dapat Login');
-                  setPesanWarning(x.response.data.message);
+                  setPesanWarning(x.response.data.data.message);
                   setWarningOpen(true);
                 });
             }
@@ -172,8 +197,14 @@ const login = () => {
       />
       <Dialogue
         open={dialogueOpen}
-        handleClose={() => router.push('/dtp')}
-        command={() => router.push('/dtp')}
+        handleClose={() => {
+          router.push('/dtp');
+          router.push('/dtp');
+        }}
+        command={() => {
+          router.push('/dtp');
+          router.push('/dtp');
+        }}
         judul='Berhasil Login'
         sub='Anda dapat Langsung menikmati Fasilitas Agree'
         but2='OK'

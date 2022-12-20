@@ -29,7 +29,7 @@ const Layout = ({ children, navbarType, active }) => {
       ) : navbarType === 4 ? (
         <Navbar3 tipe={2} />
       ) : null}
-      <main>{children}</main>
+      <main className='universal-wrap'>{children}</main>
       {navbarType === 1 || navbarType === 3 ? <Footer /> : null}
     </>
   );

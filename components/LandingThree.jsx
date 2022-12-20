@@ -1,20 +1,32 @@
 import React from 'react';
 import { BiChevronRight } from 'react-icons/bi';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-const Kartu = ({ seri, image1, image2, text, textTombol }) => (
+const Kartu = ({
+  seri,
+  image1,
+  image2,
+  text,
+  textTombol,
+  link,
+  color,
+  router,
+}) => (
   <div className={`${seri} flex-y-between-start`}>
     <Image className='gambarKartu' src={image1} alt='Image'></Image>
     <span>{text}</span>
-    <div>
-      <span>{textTombol}</span>
-      <BiChevronRight className='logo' />
+    <div onClick={() => router.push(link)} style={{ cursor: 'pointer' }}>
+      <span style={{ color: color }}>{textTombol}</span>
+      <BiChevronRight className='logo' color={color} />
     </div>
     <Image className='image' src={image2} alt='Image'></Image>
   </div>
 );
 
 const LandingThree = ({ data }) => {
+  const router = useRouter();
+
   return (
     <div className='home-3 flex-y-between'>
       <div className='centering'>
@@ -36,6 +48,9 @@ const LandingThree = ({ data }) => {
                 image2={x.image2}
                 text={x.text}
                 textTombol={x.textTombol}
+                link={x.link}
+                color={x.color}
+                router={router}
               />
             ))
         )}
@@ -52,6 +67,8 @@ const LandingThree = ({ data }) => {
                 image2={x.image2}
                 text={x.text}
                 textTombol={x.textTombol}
+                link={x.link}
+                router={router}
               />
             ))
         )}

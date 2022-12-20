@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 
 const Kartu = ({ title, text }) => (
-  <div className='kartu'>
+  <div style={{ cursor: 'pointer' }} className='kartu'>
     <span>{title}</span>
     <span>{text}</span>
   </div>

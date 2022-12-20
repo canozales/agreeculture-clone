@@ -1,17 +1,18 @@
 import React from 'react';
 import { BiChevronRight } from 'react-icons/bi';
 import KartuBerita from './KartuBerita';
+import Link from 'next/link';
 
 const LandingSeven = ({ data }) => {
   return (
     <div className='home-7'>
-      <div className='atas'>
+      <Link className='atas link' href='/berita-kegiatan'>
         <span>Berita & Kegiatan Agree</span>
         <div>
           <span>Lihat Berita & Kegiatan Lainnya</span>
           <BiChevronRight className='logo' />
         </div>
-      </div>
+      </Link>
       <div className='bawah'>
         {React.Children.toArray(
           data

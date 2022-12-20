@@ -27,7 +27,7 @@ const Navbar2b = () => {
   React.useEffect(() => {
     setNama(String(Cookies.get('nama')));
     const foto = localStorage.getItem('gambar');
-    if (foto !== 'undefined') {
+    if (foto !== '') {
       setGambar(foto);
     }
   }, []);
@@ -77,6 +77,7 @@ const Navbar2b = () => {
                 onClick={() => {
                   Cookies.remove('id');
                   Cookies.remove('nama');
+                  Cookies.remove('jwt');
                   localStorage.removeItem('gambar');
                   router.push('/');
                 }}

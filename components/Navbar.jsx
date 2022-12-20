@@ -33,7 +33,7 @@ const Navbar = () => {
       setNama(String(Cookies.get('nama')));
     }
     const foto = localStorage.getItem('gambar');
-    if (foto !== 'undefined') {
+    if (foto !== '') {
       setGambar(foto);
     }
   }, []);
@@ -124,6 +124,7 @@ const Navbar = () => {
                     onClick={() => {
                       Cookies.remove('id');
                       Cookies.remove('nama');
+                      Cookies.remove('jwt');
                       localStorage.removeItem('gambar');
                       router.push('/dtp/login');
                     }}
@@ -224,6 +225,7 @@ const Navbar = () => {
                             onClick={() => {
                               Cookies.remove('id');
                               Cookies.remove('nama');
+                              Cookies.remove('jwt');
                               localStorage.removeItem('gambar');
                               router.push('/dtp/login');
                             }}

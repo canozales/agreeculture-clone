@@ -19,10 +19,7 @@ const Navbar2 = ({ active }) => {
 
   return (
     <>
-      <div
-        className='sidebar'
-        style={{ display: isOpen ? 'flex' : 'nostylex' }}
-      >
+      <div className='sidebar' style={{ display: isOpen ? 'flex' : null }}>
         <div className='tempatlogo'>
           {isOpen ? (
             <AiOutlineClose onClick={() => setIsOpen(false)} className='logo' />
