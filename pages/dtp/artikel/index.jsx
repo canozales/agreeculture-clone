@@ -18,15 +18,18 @@ const Artikel = () => {
   const [data, setData] = React.useState([]);
   const id = Cookies.get('id');
   const jwt = Cookies.get('jwt');
+  console.log(jwt);
   const router = useRouter();
   const [dialogueOpen, setDialogueOpen] = React.useState(false);
   const [idHapus, setIdHapus] = React.useState('');
 
   React.useEffect(() => {
     getBeritaByOwner(id, jwt)
-      .then((x) => setData(x))
+      .then((x) => {
+        setData(x);
+      })
       .catch((err) => console.log(err));
-  }, [id]);
+  }, []);
 
   return (
     <Layout navbarType={2} active={5}>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const LandingOne = (props) => {
   return (
-    <div className='home-1'>
+    <div className='home-1' data-testid='landing-one'>
       <div className='gambar flex-y-between-start'>
         <span>{props.textOne}</span>
         <span>{props.textTwo}</span>

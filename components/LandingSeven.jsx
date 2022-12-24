@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const LandingSeven = ({ data }) => {
   return (
-    <div className='home-7'>
+    <div className='home-7' data-testid='landing-seven'>
       <Link className='atas link' href='/berita-kegiatan'>
         <span>Berita & Kegiatan Agree</span>
         <div>

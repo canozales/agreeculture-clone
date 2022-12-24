@@ -28,7 +28,7 @@ const LandingThree = ({ data }) => {
   const router = useRouter();
 
   return (
-    <div className='home-3 flex-y-between'>
+    <div className='home-3 flex-y-between' data-testid='landing-three'>
       <div className='centering'>
         <h4>Agriculture Technology</h4>
         <span>

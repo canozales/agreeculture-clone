@@ -33,7 +33,7 @@ const Navbar2b = () => {
   }, []);
 
   return (
-    <div className='sidebar-2'>
+    <div className='sidebar-2' data-testid='navbar-twob'>
       <span className='dash'>Dashboard Navigasi</span>
       <AiOutlineMenu onClick={() => setIsOpen(true)} className='logo' />
       <div className=' profilex'>

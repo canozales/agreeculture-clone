@@ -4,7 +4,7 @@ import { BiChevronRight } from 'react-icons/bi';
 
 const LandingFour = ({ data }) => {
   return (
-    <div className='home-4'>
+    <div className='home-4' data-testid='landing-four'>
       <div className='main flex-y-between-start'>
         <span>Cerita dari mereka yang sudah bergabung</span>
         <span>

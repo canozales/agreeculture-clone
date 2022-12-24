@@ -59,6 +59,7 @@ const Navbar3 = ({ tipe }) => {
   return (
     <>
       <div
+        data-testid='navbar-three'
         className={`navbar3 flex-x-between ${
           tipe === 1
             ? scrollPosition > 0

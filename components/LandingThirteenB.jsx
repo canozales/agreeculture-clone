@@ -3,7 +3,10 @@ import Image from 'next/image';
 
 const LandingThirteenB = ({ data }) => {
   return (
-    <div className={`home-13b ${data.background}`}>
+    <div
+      className={`home-13b ${data.background}`}
+      data-testid='landing-thirteenb'
+    >
       <div>
         <Image className='gambar' src={data.imageLeft} alt='Image'></Image>
         <span>{data.text}</span>

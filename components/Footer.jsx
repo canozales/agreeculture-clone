@@ -7,7 +7,7 @@ import { AiOutlineInstagram } from 'react-icons/ai';
 import Link from 'next/link';
 const Footer = () => {
   return (
-    <div className='footer flex-y'>
+    <div className='footer flex-y' data-testid='footer'>
       <div className='atas'>
         <div className='flex-y-between-start agree'>
           <Image className='image' src={logo} alt='Image'></Image>

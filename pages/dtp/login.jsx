@@ -10,14 +10,22 @@ import BackTo from '../../components/BackTo';
 import Link from 'next/link';
 import { userLogin } from '../../api-helpers/backend/utils';
 import Dialogue from '../../components/Dialogue';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Head from 'next/head';
+import Router from 'next/router';
 
 const jwt = require('jsonwebtoken');
 
-const login = () => {
-  const [email, setEmail] = React.useState('');
+const Login = () => {
+  let rememberMe = false;
+  let rememberEmail = '';
+
+  if (Cookies.get('rememberMe')) {
+    rememberMe = true;
+    rememberEmail = Cookies.get('rememberEmail');
+  }
+
+  const [email, setEmail] = React.useState(rememberEmail);
   const [password, setPassword] = React.useState('');
   const [hidePass, setHidePass] = React.useState(true);
 
@@ -30,19 +38,16 @@ const login = () => {
   const [pesanJudul, setPesanJudul] = React.useState(false);
   const [pesanWarning, setPesanWarning] = React.useState(false);
 
-  const router = useRouter();
   const ref = React.useRef(null);
 
-  let rememberMe = false;
-  let rememberEmail;
-
-  if (Cookies.get('rememberMe')) {
-    rememberMe = true;
-    rememberEmail = Cookies.get('rememberEmail');
-  }
+  React.useEffect(() => {
+    if (Cookies.get('id')) {
+      Router.push('/dtp');
+    }
+  }, []);
 
   return (
-    <div className='login'>
+    <div className='login' data-testid='login-one'>
       <Head>
         <title>Login</title>
       </Head>
@@ -50,12 +55,12 @@ const login = () => {
         <BackTo text='Kembali ke Beranda' />
       </Link>
 
-      <div className='kontainer'>
+      <div className='kontainer' data-testid='login-two'>
         <Image className='logo' src={logo} alt='Image'></Image>
         <span>Login</span>
         <span>Masukkan Email dan Kata Sandi untuk masuk ke Agree</span>
 
-        <div className='kotak'>
+        <div className='kotak' data-testid='login-three'>
           <span>Email</span>
           <input
             onChange={(x) => {
@@ -77,7 +82,7 @@ const login = () => {
           )}
         </div>
 
-        <div className='kotak'>
+        <div className='kotak' data-testid='login-four'>
           <span>Kata Sandi</span>
           <div
             style={{
@@ -116,7 +121,7 @@ const login = () => {
           )}
         </div>
 
-        <div className='lupa'>
+        <div className='lupa' data-testid='login-five'>
           <div>
             <input
               ref={ref}
@@ -198,12 +203,10 @@ const login = () => {
       <Dialogue
         open={dialogueOpen}
         handleClose={() => {
-          router.push('/dtp');
-          router.push('/dtp');
+          Router.push('/dtp');
         }}
         command={() => {
-          router.push('/dtp');
-          router.push('/dtp');
+          Router.push('/dtp');
         }}
         judul='Berhasil Login'
         sub='Anda dapat Langsung menikmati Fasilitas Agree'
@@ -213,4 +216,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

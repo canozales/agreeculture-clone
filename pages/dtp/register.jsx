@@ -12,10 +12,10 @@ import BackTo from '../../components/BackTo';
 import Link from 'next/link';
 import Dialogue from '../../components/Dialogue';
 import { addUser } from '../../api-helpers/backend/utils';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Router from 'next/router';
 
-const register = () => {
+const Register = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
@@ -32,14 +32,13 @@ const register = () => {
   const [warningOpen, setWarningOpen] = React.useState(false);
   const [pesanWarning, setPesanWarning] = React.useState(false);
 
-  const router = useRouter();
   return (
-    <div className='register'>
+    <div className='register' data-testid='register-one'>
       <Head>
         <title>Register</title>
       </Head>
-      <div className='kiri'>
-        <div>
+      <div className='kiri' data-testid='register-two'>
+        <div data-testid='register-three'>
           <Link className='link' href='/' style={{ marginBottom: '3rem' }}>
             <BackTo text='Kembali ke Beranda' />
           </Link>
@@ -71,7 +70,7 @@ const register = () => {
         </div>
         <Image className='gambar' src={wave} alt='Image'></Image>
       </div>
-      <div className='kanan'>
+      <div className='kanan' data-testid='register-four'>
         <div>
           <span>Daftar</span>
           <div className='kotak'>
@@ -95,7 +94,7 @@ const register = () => {
             )}
           </div>
 
-          <div className='kotak'>
+          <div className='kotak' data-testid='register-five'>
             <span>Kata Sandi</span>
             <div
               style={{
@@ -139,7 +138,7 @@ const register = () => {
             )}
           </div>
 
-          <div className='kotak'>
+          <div className='kotak' data-testid='register-six'>
             <span>Konfirmasi Kata Sandi</span>
             <div
               style={{
@@ -180,7 +179,7 @@ const register = () => {
             )}
           </div>
 
-          <div className='syarat'>
+          <div className='syarat' data-testid='register-seven'>
             <input
               onChange={(x) => setSetuju(x.target.checked)}
               type='checkbox'
@@ -235,8 +234,8 @@ const register = () => {
 
       <Dialogue
         open={dialogueOpen}
-        handleClose={() => router.push('/dtp/login')}
-        command={() => router.push('/dtp/login')}
+        handleClose={() => Router.push('/dtp/login')}
+        command={() => Router.push('/dtp/login')}
         judul='Pendaftaran Berhasil'
         sub='Silahkan Login untuk Menikmati Fitur Agree'
         but2='OK'
@@ -253,4 +252,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

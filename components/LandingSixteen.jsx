@@ -3,7 +3,7 @@ import { BsCheck2Circle } from 'react-icons/bs';
 
 const LandingSixteen = ({ data, background }) => {
   return (
-    <div className={`home-16 ${background}`}>
+    <div className={`home-16 ${background}`} data-testid='landing-sixteen'>
       <div>
         {React.Children.toArray(
           data.map((x) => (

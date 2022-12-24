@@ -30,7 +30,7 @@ const Agreepedia = () => {
       <Head>
         <title>Agreepedia</title>
       </Head>
-      <div className='agreepedia'>
+      <div className='agreepedia' data-testid='agreepedia-one'>
         <div className='home'>
           <Image className='gambar1' src={agree4} alt='image'></Image>
           <span>
@@ -40,7 +40,7 @@ const Agreepedia = () => {
           <Image className='gambar2' src={agree6} alt='image'></Image>
         </div>
 
-        <div className='konten'>
+        <div className='konten' data-testid='agreepedia-two'>
           <Heading
             text1='Artikel Agreepedia'
             text2='Baca berbagai informasi terbaru seputar agrikultur untuk
@@ -49,7 +49,7 @@ const Agreepedia = () => {
             id='home-article'
           />
 
-          <div className='berita-utama'>
+          <div className='berita-utama' data-testid='agreepedia-three'>
             {React.Children.toArray(
               landingPages.beritaAgreepedia.slice(4, 5).map((x) => (
                 <div style={{ cursor: 'pointer' }} className='berita2'>
@@ -116,7 +116,7 @@ const Agreepedia = () => {
             id='home-info-budidaya'
           />
 
-          <div className='slider'>
+          <div className='slider' data-testid='agreepedia-four'>
             <BsArrowLeft className='logo-kiri' />
             <BsArrowRight className='logo-kanan' />
             <Swiper
@@ -199,6 +199,7 @@ const Agreepedia = () => {
           style={{ scrollMarginTop: '6.5rem' }}
           id='home-register'
           className='konten2'
+          data-testid='agreepedia-five'
         >
           <span>Ayo Daftar Agreepedia Sekarang</span>
           <span>

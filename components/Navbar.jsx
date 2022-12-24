@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className='navbar'>
+      <div className='navbar' data-testid='navbar-one'>
         <Link
           href='/'
           style={{

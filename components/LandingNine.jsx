@@ -10,7 +10,7 @@ const Kartu = ({ title, text }) => (
 
 const LandingNine = ({ data }) => {
   return (
-    <div className='home-9'>
+    <div className='home-9' data-testid='landing-nine'>
       <Image className='gambar' src={data.image} alt='image'></Image>
       <span>{data.textOne}</span>
       <span>{data.textTwo}</span>

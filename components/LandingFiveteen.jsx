@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const LandingFiveteen = ({ data }) => {
   return (
-    <div className='home-15'>
+    <div className='home-15' data-testid='landing-fiveteen'>
       <div>
         <span>{data.title1}</span>
         <span>{data.title2}</span>

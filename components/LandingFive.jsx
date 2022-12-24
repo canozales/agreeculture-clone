@@ -2,7 +2,7 @@ import React from 'react';
 
 const LandingFive = ({ data }) => {
   return (
-    <div className='home-5'>
+    <div className='home-5' data-testid='landing-five'>
       <div className='section'>
         <span>{data.text}</span>
         <div className='holding'>

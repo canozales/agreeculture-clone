@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const LandingTwo = (props) => {
   return (
-    <div className='home-2'>
+    <div className='home-2' data-testid='landing-two'>
       <div className='flex-y-between-start kiri'>
         <span>{props.textOne}</span>
         <span>{props.textTwo}</span>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const LandingEighteen = () => {
   return (
-    <div className='home-18'>
+    <div className='home-18' data-testid='landing-eighteen'>
       <span>Keuntungan Menjadi Seller di Agree Market</span>
       <div>
         <span>Kemudahan Transaksi</span>
