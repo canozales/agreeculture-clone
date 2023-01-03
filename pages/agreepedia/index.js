@@ -30,7 +30,7 @@ const Agreepedia = () => {
       <Head>
         <title>Agreepedia</title>
       </Head>
-      <div className='agreepedia' data-testid='agreepedia-one'>
+      <div className='agreepedia'>
         <div className='home'>
           <Image className='gambar1' src={agree4} alt='image'></Image>
           <span>
@@ -40,7 +40,7 @@ const Agreepedia = () => {
           <Image className='gambar2' src={agree6} alt='image'></Image>
         </div>
 
-        <div className='konten' data-testid='agreepedia-two'>
+        <div className='konten'>
           <Heading
             text1='Artikel Agreepedia'
             text2='Baca berbagai informasi terbaru seputar agrikultur untuk
@@ -49,10 +49,10 @@ const Agreepedia = () => {
             id='home-article'
           />
 
-          <div className='berita-utama' data-testid='agreepedia-three'>
+          <div className='berita-utama'>
             {React.Children.toArray(
               landingPages.beritaAgreepedia.slice(4, 5).map((x) => (
-                <div style={{ cursor: 'pointer' }} className='berita2'>
+                <div className='berita2'>
                   <Image className='gambar' src={x.image} alt='image'></Image>
                   <div className='kanan'>
                     <span>{x.text}</span>
@@ -116,7 +116,7 @@ const Agreepedia = () => {
             id='home-info-budidaya'
           />
 
-          <div className='slider' data-testid='agreepedia-four'>
+          <div className='slider'>
             <BsArrowLeft className='logo-kiri' />
             <BsArrowRight className='logo-kanan' />
             <Swiper
@@ -199,7 +199,6 @@ const Agreepedia = () => {
           style={{ scrollMarginTop: '6.5rem' }}
           id='home-register'
           className='konten2'
-          data-testid='agreepedia-five'
         >
           <span>Ayo Daftar Agreepedia Sekarang</span>
           <span>

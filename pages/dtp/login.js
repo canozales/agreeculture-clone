@@ -8,24 +8,15 @@ import {
 } from 'react-icons/ai';
 import BackTo from '../../components/BackTo';
 import Link from 'next/link';
-import { userLogin } from '../../api-helpers/backend/utils';
+import wave3 from '../../public/assets/images/wave3.png';
+import { userLogin } from '../../api-helpers/frontend/utils';
 import Dialogue from '../../components/Dialogue';
+import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Head from 'next/head';
-import Router from 'next/router';
 
-const jwt = require('jsonwebtoken');
-
-const Login = () => {
-  let rememberMe = false;
-  let rememberEmail = '';
-
-  if (Cookies.get('rememberMe')) {
-    rememberMe = true;
-    rememberEmail = Cookies.get('rememberEmail');
-  }
-
-  const [email, setEmail] = React.useState(rememberEmail);
+const login = () => {
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [hidePass, setHidePass] = React.useState(true);
 
@@ -38,16 +29,10 @@ const Login = () => {
   const [pesanJudul, setPesanJudul] = React.useState(false);
   const [pesanWarning, setPesanWarning] = React.useState(false);
 
-  const ref = React.useRef(null);
-
-  React.useEffect(() => {
-    if (Cookies.get('id')) {
-      Router.push('/dtp');
-    }
-  }, []);
+  const router = useRouter();
 
   return (
-    <div className='login' data-testid='login-one'>
+    <div className='login'>
       <Head>
         <title>Login</title>
       </Head>
@@ -55,12 +40,12 @@ const Login = () => {
         <BackTo text='Kembali ke Beranda' />
       </Link>
 
-      <div className='kontainer' data-testid='login-two'>
+      <div className='kontainer'>
         <Image className='logo' src={logo} alt='Image'></Image>
         <span>Login</span>
         <span>Masukkan Email dan Kata Sandi untuk masuk ke Agree</span>
 
-        <div className='kotak' data-testid='login-three'>
+        <div className='kotak'>
           <span>Email</span>
           <input
             onChange={(x) => {
@@ -68,7 +53,6 @@ const Login = () => {
               setCorrectEmail(/\S+@\S+\.\S+/.test(x.target.value));
             }}
             type='text'
-            defaultValue={rememberMe ? rememberEmail : ''}
             placeholder='Masukkan email yang terdaftar'
             style={{
               border: !correctEmail ? '1px solid red' : '1px solid #4d4d4d',
@@ -82,7 +66,7 @@ const Login = () => {
           )}
         </div>
 
-        <div className='kotak' data-testid='login-four'>
+        <div className='kotak'>
           <span>Kata Sandi</span>
           <div
             style={{
@@ -121,14 +105,9 @@ const Login = () => {
           )}
         </div>
 
-        <div className='lupa' data-testid='login-five'>
+        <div className='lupa'>
           <div>
-            <input
-              ref={ref}
-              type='checkbox'
-              id='cek1'
-              defaultChecked={rememberMe}
-            />
+            <input type='checkbox' id='cek1' />
             <label htmlFor='cek1'>Ingat Saya</label>
           </div>
 
@@ -152,31 +131,22 @@ const Login = () => {
             } else {
               userLogin({ email, password })
                 .then((x) => {
-                  const { userId, email, name, imageUrl } = jwt.verify(
-                    x,
-                    '234q34c5q3x45x1345x1'
+                  localStorage.setItem('gambar', x.gambar);
+                  Cookies.set('id', x.id, { expires: 1 });
+                  Cookies.set(
+                    'nama',
+                    x.nama && x.nama !== undefined ? x.nama : x.email,
+                    {
+                      expires: 1,
+                    }
                   );
-                  if (ref.current.checked) {
-                    Cookies.set('rememberMe', true);
-                    Cookies.set('rememberEmail', email);
-                  } else {
-                    Cookies.set('rememberMe', false);
-                  }
-
-                  localStorage.setItem('gambar', imageUrl);
-                  Cookies.set('id', userId, { expires: 1 });
-                  Cookies.set('jwt', x, { expires: 1 });
-                  Cookies.set('nama', name !== '' ? name : email, {
-                    expires: 1,
-                  });
                 })
                 .then(() => {
                   setDialogueOpen(true);
                 })
                 .catch((x) => {
-                  console.log(x.response.data.data.message);
                   setPesanJudul('Tidak dapat Login');
-                  setPesanWarning(x.response.data.data.message);
+                  setPesanWarning(x.response.data.message);
                   setWarningOpen(true);
                 });
             }
@@ -202,12 +172,8 @@ const Login = () => {
       />
       <Dialogue
         open={dialogueOpen}
-        handleClose={() => {
-          Router.push('/dtp');
-        }}
-        command={() => {
-          Router.push('/dtp');
-        }}
+        handleClose={() => router.push('/dtp')}
+        command={() => router.push('/dtp')}
         judul='Berhasil Login'
         sub='Anda dapat Langsung menikmati Fasilitas Agree'
         but2='OK'
@@ -216,4 +182,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default login;

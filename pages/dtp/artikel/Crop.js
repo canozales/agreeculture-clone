@@ -14,7 +14,6 @@ export function getRadianAngle(degreeValue) {
 /**
  * Returns the new bounding area of a rotated rectangle.
  */
-
 export function rotateSize(width, height, rotation) {
   const rotRad = getRadianAngle(rotation);
 
@@ -29,8 +28,6 @@ export function rotateSize(width, height, rotation) {
 /**
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  */
-import { Base64 } from 'js-base64';
-
 export default async function getCroppedImg(
   imageSrc,
   pixelCrop,
@@ -84,40 +81,12 @@ export default async function getCroppedImg(
   ctx.putImageData(data, 0, 0);
 
   // As Base64 string
-  // console.log(Base64.atob(canvas.toDataURL('image/jpeg')) instanceof File);
-  // const dataURLtoFile = (dataurl, filename) => {
-  //   const arr = dataurl.split(',');
-  //   const mime = arr[0].match(/:(.*?);/)[1];
-  //   const bstr = atob(arr[1]);
-  //   let n = bstr.length;
-  //   const u8arr = new Uint8Array(n);
-  //   while (n) {
-  //     u8arr[n - 1] = bstr.charCodeAt(n - 1);
-  //     n -= 1; // to make eslint happy
-  //   }
-  //   return new File([u8arr], filename, { type: mime });
-  // };
-
-  // function generateFilename(length) {
-  //   var result = '';
-  //   var characters =
-  //     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   var charactersLength = characters.length;
-  //   for (var i = 0; i < length; i++) {
-  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  //   }
-  //   result += '.png';
-  //   return result;
-  // }
-
-  // console.log(dataURLtoFile(canvas.toDataURL(), generateFilename(20)));
-
   return canvas.toDataURL('image/jpeg');
 
   // As a blob
   // return new Promise((resolve, reject) => {
   //   canvas.toBlob((file) => {
   //     resolve(URL.createObjectURL(file));
-  //   }, 'image/jpeg');
+  //   }, "image/jpeg");
   // });
 }

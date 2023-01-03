@@ -9,7 +9,7 @@ import nophoto2 from '../../public/assets/images/nophoto2.png';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Dialogue from '../../components/Dialogue';
-import { getUserById, userUpdate } from '../../api-helpers/backend/utils';
+import { getUserById, userUpdate } from '../../api-helpers/frontend/utils';
 
 const profile = () => {
   const [dialogueOpen, setDialogueOpen] = useState(false);
@@ -38,51 +38,23 @@ const profile = () => {
   const [gambarAkhir, setGambarAkhir] = React.useState(nophoto);
   React.useState(tagTersedia);
   const id = String(Cookies.get('id'));
-  const jwt = String(Cookies.get('jwt'));
 
   React.useEffect(() => {
-    getUserById(id, jwt)
+    getUserById(id)
       .then((x) => {
-        const { name, job, imageUrl } = x;
-        if (name !== '') {
-          setJudul(name);
+        if (x.nama && x.nama !== undefined) {
+          setJudul(x.nama);
         }
-        if (job !== '') {
-          setSubJudul(job);
+        if (x.pekerjaan && x.pekerjaan !== undefined) {
+          setSubJudul(x.pekerjaan);
         }
-
-        if (imageUrl !== '') {
-          setImage(imageUrl);
-          setGambarAkhir(imageUrl);
+        if (x.gambar && x.gambar !== undefined) {
+          setImage(x.gambar);
+          setGambarAkhir(x.gambar);
         }
       })
       .catch((err) => console.log(err));
   }, [id]);
-
-  const dataURLtoFile = (dataurl, filename) => {
-    const arr = dataurl.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n) {
-      u8arr[n - 1] = bstr.charCodeAt(n - 1);
-      n -= 1; // to make eslint happy
-    }
-    return new File([u8arr], filename, { type: mime });
-  };
-
-  function generateFilename(length) {
-    var result = '';
-    var characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    result += '.jpg';
-    return result;
-  }
 
   return (
     <Layout navbarType={2} active={0}>
@@ -219,13 +191,13 @@ const profile = () => {
             command={() => {
               userUpdate({
                 id,
-                jwt,
                 nama: judul,
                 pekerjaan: subJudul,
-                gambar: dataURLtoFile(gambarAkhir, generateFilename(15)),
+                gambar: gambarAkhir,
               })
                 .then(() => {
                   Cookies.set('nama', judul);
+                  Cookies.set('id', id);
                   localStorage.setItem('gambar', gambarAkhir);
                   router.push('/dtp/artikel/');
                 })

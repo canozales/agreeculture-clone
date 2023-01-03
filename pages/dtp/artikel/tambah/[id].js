@@ -12,10 +12,13 @@ import nophoto2 from '../../../../public/assets/images/nophoto2.png';
 import Image from 'next/image';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Dialogue from '../../../../components/Dialogue';
-import { sendBerita } from '../../../../api-helpers/backend/utils';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import {
+  getBeritaById,
+  updateBerita,
+} from '../../../../api-helpers/frontend/utils';
 import {
   KartuBerita,
   modules,
@@ -32,7 +35,6 @@ const Tambah = () => {
   const [warningOpen, setWarningOpen] = useState(false);
   const [pesanWarning, setPesanWarning] = useState('');
 
-  const [value, setValue] = useState('');
   const [judul, setJudul] = useState('');
   const [subJudul, setSubJudul] = useState('');
   const [pratinjau, setPratinjau] = useState(false);
@@ -58,20 +60,46 @@ const Tambah = () => {
     'Teknologi',
     'Inovasi',
     'Perbankan',
-    'Pariwisata',
-    'Perkebunan',
-    'Tanaman',
   ]);
-
   const router = useRouter();
+
+  const [idBerita, setIdBerita] = React.useState('');
   const [gambarAkhir, setGambarAkhir] = React.useState(nophoto);
+  const [tanggal, setTanggal] = React.useState(new Date());
   const [filteredTagTersedia, setFilteredTagTersedia] =
     React.useState(tagTersedia);
 
   const penulis = String(Cookies.get('nama'));
   const id = String(Cookies.get('id'));
-  const jwt = String(Cookies.get('jwt'));
-  const today = new Date();
+  const [value, setValue] = useState(idBerita);
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    getBeritaById(router.query.id)
+      .then((data) => {
+        setIdBerita(router.query.id);
+        setJudul(data.judul);
+        setSubJudul(data.subJudul);
+        setValue(data.isiBerita);
+        setImage(data.image);
+        if (data.image) {
+          setGambarAkhir(data.image);
+        }
+        if (data.tags) {
+          setTag(data.tags);
+          setFilteredTagTersedia(
+            filteredTagTersedia.filter((x) => !data.tags.includes(x))
+          );
+        }
+
+        setTanggal(new Date(data.updatedAt));
+      })
+      .catch((err) => {
+        console.log(err);
+        router.push('/dtp/artikel/');
+      });
+  }, [router.isReady]);
+
   React.useEffect(() => {
     inputValue === ''
       ? // Selisih Antara Tag Tersedia dengan Tag yang ditempati
@@ -86,36 +114,147 @@ const Tambah = () => {
   return (
     <>
       <Head>
-        <title>Tambah Artikel</title>
+        <title>Edit Artikel</title>
       </Head>
       {pratinjau ? (
         <div className='tambah2'>
-          <div onClick={() => setPratinjau(false)}>
+          <Link className='link' href='/dtp/artikel'>
             <BackTo text='Kembali ke Draft' />
-          </div>
+          </Link>
 
           <span>Pratinjau Artikelmu</span>
           <div className='pratinjau'>
             <span>{judul}</span>
             <span>{subJudul}</span>
             <div>
-              <span>{penulis}</span>
-              <span>{`${today.toLocaleDateString('default', {
+              <span>{'Oleh ' + penulis}</span>
+              <span>{`${tanggal.toLocaleDateString('default', {
                 day: '2-digit',
-              })} ${today.toLocaleDateString('default', {
+              })} ${tanggal.toLocaleDateString('default', {
                 month: 'long',
-              })} ${today.toLocaleDateString('default', {
+              })} ${tanggal.toLocaleDateString('default', {
                 year: 'numeric',
               })}`}</span>
             </div>
             <div dangerouslySetInnerHTML={{ __html: value }}></div>
           </div>
         </div>
-      ) : final ? (
-        <div className='tambah3'>
-          <div onClick={() => setFinal(false)}>
-            <BackTo text='Kembali ke Draft' />
+      ) : !final ? (
+        <div className='tambah'>
+          <Link href='/dtp/artikel' className='link'>
+            <BackTo text='Kembali ke Halaman Artikel' />
+          </Link>
+
+          <span>Draft</span>
+          <div className='tempat'>
+            <div className='sub'>
+              <div className='kotak'>
+                <span>Judul</span>
+                <input
+                  value={judul}
+                  onChange={(x) => setJudul(x.target.value)}
+                  type='text'
+                  placeholder='Tulis judul artikel semenarik mungkin'
+                  style={{
+                    border:
+                      filTahap1 && (judul.length < 10 || judul.length > 100)
+                        ? '1px solid red'
+                        : '',
+                  }}
+                />
+
+                {filTahap1 ? (
+                  judul.length < 10 || judul.length > 100 ? (
+                    <div className='warning'>
+                      <AiOutlineWarning className='logo' />
+                      <span>Panjang judul harus diantara 10-100 karakter</span>
+                    </div>
+                  ) : null
+                ) : null}
+              </div>
+
+              <div className='sub'>
+                <button
+                  onClick={() => {
+                    updateBerita(idBerita, {
+                      isiBerita: value,
+                      judul,
+                      subJudul,
+                    })
+                      .then(() => {
+                        router.push('/dtp/artikel/');
+                      })
+                      .catch((x) => {
+                        console.log(x);
+                      });
+                  }}
+                >
+                  Simpan sebagai Draft
+                </button>
+                <button
+                  onClick={() => {
+                    {
+                      judul.length < 10 ||
+                      judul.length > 99 ||
+                      value === '<p><br></p>' ||
+                      value === ''
+                        ? setFilTahap1(true)
+                        : setFinal(true);
+                    }
+                  }}
+                >
+                  Lanjutkan
+                </button>
+              </div>
+            </div>
+
+            <div className='sub'>
+              <div className='kotak'>
+                <span>Sub Judul Artikel</span>
+                <input
+                  value={subJudul}
+                  onChange={(x) => setSubJudul(x.target.value)}
+                  type='text'
+                  placeholder='Bisa berupa deskripsi singkat atau rangkuman artikelmu'
+                />
+              </div>
+
+              <span
+                onClick={() => {
+                  console.log(value);
+                  setPratinjau(true);
+                }}
+              >
+                Pratinjau Artikel
+              </span>
+            </div>
+            <div className='sub'>
+              <span>Artikel</span>
+              {filTahap1 ? (
+                value === '<p><br></p>' || value === '' ? (
+                  <span>Konten artikel tidak boleh kosong</span>
+                ) : null
+              ) : null}
+            </div>
+
+            <ReactQuill
+              theme='snow'
+              style={{
+                color: '#000',
+              }}
+              modules={modules}
+              formats={formats}
+              value={value}
+              onChange={setValue}
+              placeholder={'Write something awesome...'}
+            />
           </div>
+        </div>
+      ) : (
+        <div className='tambah3'>
+          <Link className='link' href='/dtp/artikel'>
+            <BackTo text='Kembali ke Artikel' />
+          </Link>
 
           <span>Pratinjau Tampilan Artikelmu</span>
           <div className='pratinjau'>
@@ -202,7 +341,7 @@ const Tambah = () => {
                       border:
                         judul.length < 10 || judul.length > 100
                           ? '1px solid red'
-                          : '1px solid #4d4d4d',
+                          : '',
                     }}
                   />
                 </div>
@@ -329,7 +468,7 @@ const Tambah = () => {
                       }
                     }}
                   >
-                    Submit Artikel
+                    Update Artikel
                   </button>
                   <div>
                     <RiErrorWarningLine className='logo' />
@@ -351,13 +490,7 @@ const Tambah = () => {
                     sektor={tag}
                     text={judul}
                     image={gambarAkhir}
-                    date={`${today.toLocaleDateString('default', {
-                      day: '2-digit',
-                    })} ${today.toLocaleDateString('default', {
-                      month: 'long',
-                    })} ${today.toLocaleDateString('default', {
-                      year: 'numeric',
-                    })}`}
+                    date='28 November 2022'
                   />
                 </div>
               </div>
@@ -368,16 +501,14 @@ const Tambah = () => {
             open={dialogueOpen}
             handleClose={() => setDialogueOpen(false)}
             command={() => {
-              sendBerita({
+              updateBerita(idBerita, {
                 isiBerita: value,
                 judul,
                 subJudul,
                 tags: tag,
                 image: gambarAkhir,
                 penulis,
-                belongsTo: id,
                 status: 'Posted',
-                jwt,
               })
                 .then(() => {
                   router.push('/dtp/artikel/');
@@ -386,10 +517,10 @@ const Tambah = () => {
                   console.log(x);
                 });
             }}
-            judul='Yakin ingin submit Artikel?'
-            sub='Artikelmu akan divalidasi oleh admin Agreepedia'
+            judul='Yakin ingin update Artikel?'
+            sub='Artikelmu akan diupdate ke Database Agreepedia'
             but1='Kembali'
-            but2='Submit'
+            but2='Update'
           />
           <Dialogue
             open={warningOpen}
@@ -399,126 +530,6 @@ const Tambah = () => {
             sub={pesanWarning}
             but2='OK'
           />
-        </div>
-      ) : (
-        <div className='tambah'>
-          <Link href='/dtp/artikel' className='link'>
-            <BackTo text='Kembali ke Halaman Artikel' />
-          </Link>
-
-          <span>Draft</span>
-          <div className='tempat'>
-            <div className='sub'>
-              <div className='kotak'>
-                <span>Judul</span>
-                <input
-                  value={judul}
-                  onChange={(x) => setJudul(x.target.value)}
-                  type='text'
-                  placeholder='Tulis judul artikel semenarik mungkin'
-                  style={{
-                    border:
-                      filTahap1 && (judul.length < 10 || judul.length > 100)
-                        ? '1px solid red'
-                        : '1px solid #4d4d4d',
-                  }}
-                />
-
-                {filTahap1 ? (
-                  judul.length < 10 || judul.length > 100 ? (
-                    <div className='warning'>
-                      <AiOutlineWarning className='logo' />
-                      <span>Panjang judul harus diantara 10-100 karakter</span>
-                    </div>
-                  ) : null
-                ) : null}
-              </div>
-
-              <div className='sub'>
-                <button
-                  onClick={() => {
-                    judul.length < 10 ||
-                    judul.length > 99 ||
-                    value === '<p><br></p>' ||
-                    value === ''
-                      ? setFilTahap1(true)
-                      : sendBerita({
-                          isiBerita: value,
-                          judul,
-                          subJudul,
-                          penulis,
-                          belongsTo: id,
-                          status: 'Draft',
-                          jwt,
-                        })
-                          .then(() => {
-                            router.push('/dtp/artikel/');
-                          })
-                          .catch((x) => {
-                            console.log(x);
-                          });
-                  }}
-                >
-                  Simpan sebagai Draft
-                </button>
-                <button
-                  onClick={() => {
-                    {
-                      judul.length < 10 ||
-                      judul.length > 99 ||
-                      value === '<p><br></p>' ||
-                      value === ''
-                        ? setFilTahap1(true)
-                        : setFinal(true);
-                    }
-                  }}
-                >
-                  Lanjutkan
-                </button>
-              </div>
-            </div>
-
-            <div className='sub'>
-              <div className='kotak'>
-                <span>Sub Judul Artikel</span>
-                <input
-                  value={subJudul}
-                  onChange={(x) => setSubJudul(x.target.value)}
-                  type='text'
-                  placeholder='Bisa berupa deskripsi singkat atau rangkuman artikelmu'
-                />
-              </div>
-
-              <span
-                onClick={() => {
-                  console.log(value);
-                  setPratinjau(true);
-                }}
-              >
-                Pratinjau Artikel
-              </span>
-            </div>
-            <div className='sub'>
-              <span>Artikel</span>
-              {filTahap1 ? (
-                value === '<p><br></p>' || value === '' ? (
-                  <span>Konten artikel tidak boleh kosong</span>
-                ) : null
-              ) : null}
-            </div>
-
-            <ReactQuill
-              theme='snow'
-              style={{
-                color: '#000',
-              }}
-              modules={modules}
-              formats={formats}
-              value={value}
-              onChange={setValue}
-              placeholder={'Write something awesome...'}
-            />
-          </div>
         </div>
       )}
     </>

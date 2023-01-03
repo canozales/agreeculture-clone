@@ -5,13 +5,13 @@ import Cookies from 'js-cookie';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { getBeritaById } from '../../../../api-helpers/backend/utils';
+import { getBeritaById } from '../../../../api-helpers/frontend/utils';
 
 const Tambah = () => {
   const router = useRouter();
   const idBerita = router.query.id;
   const penulis = String(Cookies.get('nama'));
-  const jwt = String(Cookies.get('jwt'));
+
   const [judul, setJudul] = useState('');
   const [subJudul, setSubJudul] = useState('');
   const [value, setValue] = useState(idBerita);
@@ -20,14 +20,12 @@ const Tambah = () => {
   React.useEffect(() => {
     if (!router.isReady) return;
 
-    getBeritaById(router.query.id, jwt)
+    getBeritaById(router.query.id)
       .then((data) => {
         setJudul(data.judul);
-        setSubJudul(data.subjudul);
-        setValue(data.content);
-        setTanggal(
-          new Date(data.updatedAt !== '' ? data.updatedAt : data.createdAt)
-        );
+        setSubJudul(data.subJudul);
+        setValue(data.isiBerita);
+        setTanggal(new Date(data.updatedAt));
       })
       .catch((err) => {
         console.log(err);
