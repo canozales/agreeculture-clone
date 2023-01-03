@@ -9,10 +9,13 @@ const wrapper = require('../helpers/utils/wrapper');
 const corsMiddleware = require('restify-cors-middleware');
 const userHandler = require('../modules/user/handlers/api_handler');
 
-let crossOrigin = (req,res,next) => {
-  // res.header('Access-Control-Allow-Origin', '*');
+let crossOrigin = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, auth-token'
+  );
   if ('OPTIONS' == req.method) {
     res.send(200);
   }
@@ -22,14 +25,16 @@ let crossOrigin = (req,res,next) => {
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
   origins: ['*'],
-  allowHeaders: ['Origin, X-Requested-With, Content-Type, Accept, OPTIONS'],
-  exposeHeaders: ['OPTIONS']
+  allowHeaders: [
+    'auth-token, Origin, X-Requested-With, Content-Type, Accept, OPTIONS',
+  ],
+  exposeHeaders: ['OPTIONS'],
 });
 
-let AppServer = function(){
+let AppServer = function () {
   this.server = restify.createServer({
     name: project.name + '-server',
-    version: project.version
+    version: project.version,
   });
 
   this.server.serverKey = '';
@@ -46,7 +51,12 @@ let AppServer = function(){
 
   //anonymous can access the end point, place code bellow
   this.server.get('/', (req, res, next) => {
-    wrapper.response(res,'success',wrapper.data('Index'),'This service is running properly');
+    wrapper.response(
+      res,
+      'success',
+      wrapper.data('Index'),
+      'This service is running properly'
+    );
   });
 
   //authenticated client can access the end point, place code bellow
@@ -54,11 +64,26 @@ let AppServer = function(){
   this.server.post('/api/v1/login', userHandler.postDataLogin);
   this.server.post('/api/v1/forgot-password', userHandler.passwordReset);
   this.server.post('/api/v1/reset-password/', userHandler.passwordUpdate);
-  this.server.get('/api/v1/user/', jwtAuth.verifyToken, userHandler.getAllUsers);
-  this.server.get('/api/v1/user/:userId', jwtAuth.verifyToken, userHandler.getUser);
-  this.server.put('/api/v1/user/:userId', jwtAuth.verifyToken, userHandler.putOneUser);
-  this.server.del('/api/v1/user/:userId', jwtAuth.verifyToken, userHandler.deleteOneUser);
-
+  this.server.get(
+    '/api/v1/user/',
+    jwtAuth.verifyToken,
+    userHandler.getAllUsers
+  );
+  this.server.get(
+    '/api/v1/user/:userId',
+    jwtAuth.verifyToken,
+    userHandler.getUser
+  );
+  this.server.put(
+    '/api/v1/user/:userId',
+    jwtAuth.verifyToken,
+    userHandler.putOneUser
+  );
+  this.server.del(
+    '/api/v1/user/:userId',
+    jwtAuth.verifyToken,
+    userHandler.deleteOneUser
+  );
 };
 
 module.exports = AppServer;

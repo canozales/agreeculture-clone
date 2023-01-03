@@ -17,11 +17,11 @@
     "MOCKUP_TOPIC": "arn:aws:sns:ap-southeast-1:632537985342:MockupTopic",
     "DEVELOPMENT_MONGO_DATABASE_URL": "mongodb+srv://agreeadmin:pw7Xdc6GyZ6xTH0i@agreedbcluster.tfczsv8.mongodb.net/agreeUserDB",
     "MINIO": {
-        "endPoint": "172.29.0.1",
+        "endPoint": "172.80.5.120",
         "port": 9000,
         "useSSL": false,
-        "accessKey": "admin",
-        "secretKey": "password"
+        "accessKey": "minioadmin",
+        "secretKey": "minioadmin"
     },
     "EMAIL_ACC" : {
         "user": "agreepedia123@gmail.com",
